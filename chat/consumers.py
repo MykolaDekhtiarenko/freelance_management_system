@@ -29,7 +29,7 @@ def ws_receive(message):
 def ws_disconnect(message):
     try:
         label = message.channel_session['room']
-        room = Room.objects.get(label=label)
+        # room = Room.objects.get(label=label)
         Group('chat-' + label, channel_layer=message.channel_layer).discard(message.reply_channel)
     except (KeyError, Room.DoesNotExist):
         pass

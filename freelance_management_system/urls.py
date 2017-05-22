@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^room/', include('chat.urls')),
+    url(r'^chat/', include('chat.urls')),
 ]

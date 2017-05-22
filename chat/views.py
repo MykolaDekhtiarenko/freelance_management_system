@@ -1,9 +1,14 @@
 from django.db import transaction
 from django.shortcuts import render, redirect
+from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
+
 from chat.models import *
 import string
 import random
 # Create your views here.
+from chat.serializers import RoomSerializer
+
 
 def chat_room(request, label):
 
@@ -34,3 +39,8 @@ def new_room(request):
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+
+class RoomViewSet(ModelViewSet):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
