@@ -2,7 +2,7 @@
  * Created by mykola.dekhtiarenko on 21.05.17.
  */
 var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-var chat_socket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
+var chat_socket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + window.location.pathname);
 
 
 $('#chatform').on('submit', function(event) {

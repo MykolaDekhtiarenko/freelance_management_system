@@ -1,6 +1,4 @@
-import re
 import json
-import logging
 from channels import Group
 from channels.sessions import channel_session
 from chat.models import Room
@@ -10,6 +8,7 @@ from chat.models import Room
 @channel_session
 def ws_connect(message):
     prefix, label = message['path'].strip('/').split('/')
+    print(prefix+" "+label)
     room = Room.objects.get(label=label)
     message.reply_channel.send({"accept": True})
     Group('chat-' + label).add(message.reply_channel)
@@ -28,7 +27,6 @@ def ws_receive(message):
 
 @channel_session
 def ws_disconnect(message):
-    print("Роз'єдную")
     try:
         label = message.channel_session['room']
         room = Room.objects.get(label=label)
