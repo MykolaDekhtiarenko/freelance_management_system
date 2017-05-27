@@ -8,7 +8,6 @@ var chat_socket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.
 $('#chatform').on('submit', function(event) {
     event.stopImmediatePropagation();
     var message = {
-        handle: $('#handle').val(),
         message: $('#message').val(),
     }
     chat_socket.send(JSON.stringify(message));
@@ -19,7 +18,7 @@ chat_socket.onmessage = function(message) {
     var data = JSON.parse(message.data);
     $('#chat').append('<tr>'
         + '<td>' + data.timestamp + '</td>'
-        + '<td>' + data.handle + '</td>'
+        + '<td>' + data.user + '</td>'
         + '<td>' + data.message + ' </td>'
     + '</tr>');
 };

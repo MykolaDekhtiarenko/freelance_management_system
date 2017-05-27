@@ -1,46 +1,35 @@
-from django.db import transaction
-from django.shortcuts import render, redirect
-from rest_framework.generics import ListAPIView
-from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
 
 from chat.models import *
-import string
-import random
-# Create your views here.
-from chat.serializers import RoomSerializer
 
 
+#Для методів класу використовуй: @method_decorator(login_required)
+
+@login_required
 def chat_room(request, label):
-
-    # If the room with the given label doesn't exist, automatically create it
-    # upon first visit (a la etherpad).
-    room, created = Room.objects.get_or_create(label=label)
-
-    # We want to show the last 50 messages, ordered most-recent-last
+    print(request.user)
+    room, created = Project.objects.get_or_create(chatRoom=label)
+    print("Room belongs to ", room.name)
     messages = reversed(room.messages.order_by('-timestamp')[:50])
-
     return render(request, "chat/room.html", {
         'room': room,
         'messages': messages,
     })
 
-def new_room(request):
-    """
-    Randomly create a new room, and redirect to it.
-    """
-    new_room = None
-    while not new_room:
-        with transaction.atomic():
-            label = id_generator(10)
-            if Room.objects.filter(label=label).exists():
-                continue
-            new_room = Room.objects.create(label=label)
-    return redirect(chat_room, label=label)
-
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
-
-
-class RoomViewSet(ModelViewSet):
-    serializer_class = RoomSerializer
-    queryset = Room.objects.all()
+# def new_room(request):
+#     """
+#     Randomly create a new room, and redirect to it.
+#     """
+#     new_room = None
+#     while not new_room:
+#         with transaction.atomic():
+#             label = id_generator(10)
+#             if Room.objects.filter(label=label).exists():
+#                 continue
+#             new_room = Room.objects.create(label=label)
+#     return redirect(chat_room, label=label)
+#
+# def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+#     return ''.join(random.choice(chars) for _ in range(size))

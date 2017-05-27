@@ -15,10 +15,10 @@
   <form id="chatform">
     <table id="chat">
       <tbody>
-        {% for message in messages %}
+        {% for message in room.messages.all %}
           <tr>
             <td>{{ message.formatted_timestamp }}</td>
-            <td>{{ message.handle }}</td>
+            <td>{{ message.user.username }}</td>
             <td>{{ message.message }}</td>
           </tr> 
         {% endfor %}
