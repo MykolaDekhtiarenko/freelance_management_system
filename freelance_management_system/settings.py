@@ -30,6 +30,12 @@ LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.IsAuthenticated',
+)
+}
+
 INSTALLED_APPS = [
     'channels',
     'django.contrib.admin',
