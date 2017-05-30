@@ -30,6 +30,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'name', 'description', 'stage',
                   'chatRoom', 'creator')
+    def create(self, validated_data):
+        return Project.objects.create(
+            creator=self.context['request'].user, **validated_data
+        )
 
 class TaskSerializer(serializers.ModelSerializer):
     developers = UserSerializer(read_only=True, many=True)
@@ -37,15 +41,22 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('description', 'deadline', 'stage', 'project', 'developers')
 
-
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Comment
         fields = '__all__'
+    def create(self, validated_data):
+        return Comment.objects.create(
+            user = self.context['request'].user, **validated_data
+        )
 
 class ApplicationSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Application
         fields = '__all__'
+    def create(self, validated_data):
+        return Application.objects.create(
+            user=self.context['request'].user, **validated_data
+        )
