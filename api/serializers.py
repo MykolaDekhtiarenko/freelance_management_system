@@ -1,5 +1,6 @@
 from api.models import *
 from rest_framework import serializers
+from django.template.defaultfilters import slugify
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -30,9 +31,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'name', 'description', 'stage',
                   'chatRoom', 'creator')
+        extra_kwargs = {
+            'chatRoom': {
+                'read_only': True
+            }
+        }
     def create(self, validated_data):
         return Project.objects.create(
-            creator=self.context['request'].user, **validated_data
+            creator=self.context['request'].user, **validated_data,
+            chatRoom=slugify(str(self.context['request'].user)+'-'+validated_data['name'])
         )
 
 class TaskSerializer(serializers.ModelSerializer):
