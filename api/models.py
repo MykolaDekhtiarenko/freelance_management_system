@@ -31,6 +31,10 @@ class Portfolio(models.Model):
     phone = models.CharField(max_length=15)
     skills = models.ManyToManyField(Skill)
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=10)
+
 class Task(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField()
