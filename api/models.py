@@ -11,8 +11,8 @@ class Project(models.Model):
     chatRoom = models.SlugField(unique=True)
     creator = models.ForeignKey(User, null=False)
 
-    # def __str__(self):
-    #     return str(self.name, self.description, self.chatRoom)
+    def __str__(self):
+        return 'Name: %s Description: %s ChatRoom: %s' % (self.name, self.description, self.chatRoom)
 #Заявка
 class Application(models.Model):
     status = models.CharField(max_length=20)
@@ -37,8 +37,9 @@ class Task(models.Model):
     stage = models.CharField(max_length=20)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     developers = models.ManyToManyField(User)
-    # creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "Task: %s on project: %s; stage: %s" % (self.description ,self.project_id, self.stage)
 class Comment(models.Model):
     text = models.TextField()
     timestamp = models.DateTimeField()
