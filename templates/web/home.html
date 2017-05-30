@@ -1,22 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{#    {% my_template_tag user %}#}
 
     <div class="container">
-        <div class="row">
-            <h2>Додайте свої дані</h2>
-            <form action="/api/portfolio/"  method="post">{% csrf_token %}
-                About:<br>
-                <input type="text" name="about" value="Tell us about yourself"><br>
-                Education:<br>
-                <input type="text" name="education" value="Your education"><br>
-                Experience:<br>
-                <input type="text" name="experience" value="Your experience"><br>
-                Phone:<br>
-                <input type="text" name="phone" value="phone"><br>
-                <input type="submit" value="Submit">
-            </form>
-            <a href="/logout">Logout</a>
+
+        {% if user.profile.role == 'D' %}
+            {{ user.first_name }} {{ user.last_name }} <br>
+            {% if not user.portfolio%}
+                <div class="row">
+                <h2>Mи хотіли б знати про вас більше<br>
+                Додайте свої дані</h2>
+                <form action="/api/portfolio/" method="post">{% csrf_token %}
+                    About:<br>
+                    <input type="text" name="about" value="Tell us about yourself"><br>
+                    Education:<br>
+                    <input type="text" name="education" value="Your education"><br>
+                    Experience:<br>
+                    <input type="text" name="experience" value="Your experience"><br>
+                    Phone:<br>
+                    <input type="text" name="phone" value="phone"><br>
+                    <input type="submit" value="Submit">
+                </form>
+            {% else %}
+                Ваш номер телефону: {{ user.portfolio.phone }}<br>
+            {% endif %}
+        {% endif %}
+        <a href="/logout">Logout</a>
         </div>
     </div>
 {% endblock %}

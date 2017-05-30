@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+
 from api.models import *
 from rest_framework import serializers
 from django.template.defaultfilters import slugify
@@ -67,3 +69,34 @@ class ApplicationSerializer(serializers.ModelSerializer):
         return Application.objects.create(
             user=self.context['request'].user, **validated_data
         )
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ("password", "email", "first_name", "last_name")
+        extra_kwargs = {'password': {'write_only': True}, }
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model= Profile
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        username = user_data["email"]
+        role = validated_data.pop('role')
+        if role not in Profile.RoleValues.values:
+            raise str("Unsupported role exeption. Only %s supported. You set: '%s'.", Profile.RoleValues.values, role)
+        user = User(username=username, **user_data)
+        user.set_password(user_data["password"])
+        user.save()
+        profile = Profile.objects.create(user=user, role=role)
+        group, created = Group.objects.get_or_create(name=role)
+        user.groups.add(group)
+        return profile
+
+

@@ -10,6 +10,7 @@ router.register(r'project', ProjectModelViewSet, 'Project')
 router.register(r'task', TaskModelViewSet, 'Task')
 router.register(r'comment', CommentModelViewSet, 'Comment')
 router.register(r'application', ApplicationModelViewSet, 'Application')
+router.register(r'profile', ProfileModelViewSet, 'Profile')
 
 
 
