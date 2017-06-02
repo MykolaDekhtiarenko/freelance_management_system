@@ -1,7 +1,6 @@
 import json
 from channels import Group
 from channels.auth import channel_session_user, channel_session_user_from_http
-from channels.sessions import channel_session
 from api.models import Project
 
 
@@ -11,7 +10,6 @@ def ws_connect(message):
     prefix, label = message['path'].strip('/').split('/')
     print(prefix, label)
     room = Project.objects.get(chatRoom=label)
-    # print(room)
     message.reply_channel.send({"accept": True})
     Group('chat-' + label).add(message.reply_channel)
     message.channel_session['room'] = room.chatRoom
