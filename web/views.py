@@ -16,7 +16,10 @@ def portfolio(request):
     if not request.user.is_superuser:
         u_role = request.user.profile.role
         if u_role == Profile.RoleValues.developer:
-            return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user=request.user)})
+            try:
+                return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user=request.user)})
+            except Portfolio.DoesNotExist:
+                return render(request, "web/portfolio.html", {'portfolio': None})
         else:
             raise Http404("No portfolio is available for users who are %s" % u_role)
     else:
@@ -30,14 +33,12 @@ class AllProjectsListView(LoginRequiredMixin, ListView):
 class MyProjectsListView(LoginRequiredMixin, ListView):
     template_name = "web/myprojects.html"
     paginate_by = 10
-
     def get_queryset(self):
         if not self.request.user.is_superuser:
             if self.request.user.profile.role == Profile.RoleValues.creator:
-                return Project.objects.filter(creator = self.request.user)
+                return Project.objects.filter(creator=self.request.user)
             elif self.request.user.profile.role == Profile.RoleValues.developer:
-                # TODO add filter by status of application
-                return Project.objects.filter(applications__user=self.request.user)
+                return Project.objects.filter(applications__user=self.request.user).filter(applications__status__exact=Application.StatusValues.accepted)
         else:
             raise Http404("No portfolio is available for superuser")
 

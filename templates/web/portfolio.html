@@ -15,7 +15,20 @@
         <p>{{ portfolio.phone }}</p>
     </div>
 {% else %}
-    <div>No portfolio yet.</div>
+   <div class="row">
+                <h2>Mи хотіли б знати про вас більше<br>
+                Додайте свої дані</h2>
+                <form action="/api/portfolio/" method="post">{% csrf_token %}
+                    About:<br>
+                    <input type="text" name="about" value="Tell us about yourself"><br>
+                    Education:<br>
+                    <input type="text" name="education" value="Your education"><br>
+                    Experience:<br>
+                    <input type="text" name="experience" value="Your experience"><br>
+                    Phone:<br>
+                    <input type="text" name="phone" value="phone"><br>
+                    <input type="submit" value="Submit">
+                </form>
 {% endif %}
 
 {% endblock %}
