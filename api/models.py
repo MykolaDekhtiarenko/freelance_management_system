@@ -4,9 +4,14 @@ from djchoices import DjangoChoices, ChoiceItem
 
 
 class Project(models.Model):
+    class StageValues(DjangoChoices):
+        preparation = ChoiceItem("P")
+        development = ChoiceItem("D")
+        finished = ChoiceItem("F")
+
     name = models.TextField()
     description = models.TextField()
-    stage = models.CharField(max_length=20)
+    stage = models.CharField(max_length=1, choices=StageValues.choices, default=StageValues.preparation)
     startDate = models.DateField
     endDate = models.DateField
     chatRoom = models.SlugField(unique=True)
@@ -17,7 +22,12 @@ class Project(models.Model):
 
 #Заявка
 class Application(models.Model):
-    status = models.CharField(max_length=20)
+    class StatusValues(DjangoChoices):
+        waiting = ChoiceItem("W")
+        accepted = ChoiceItem("A")
+        refused = ChoiceItem("R")
+
+    status = models.CharField(max_length=1, choices=StatusValues.choices, default=StatusValues.waiting)
     cv = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="applications")
