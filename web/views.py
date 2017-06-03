@@ -11,6 +11,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def home(request):
     return render(request, "web/home.html")
 
+@login_required(login_url="/login")
+def portfolio(request):
+    if not request.user.is_superuser:
+        u_role = request.user.profile.role
+        if u_role == Profile.RoleValues.developer:
+            return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user=request.user)})
+        else:
+            raise Http404("No portfolio is available for users who are %s" % u_role)
+    else:
+        raise Http404("No portfolio is available for superusers")
+
 class AllProjectsListView(LoginRequiredMixin, ListView):
     model = Project
     template_name = "web/allprojects.html"
@@ -35,15 +46,3 @@ class MyApplicationsListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     def get_queryset(self):
         return Application.objects.filter(user=self.request.user)
-
-class PortfolioDetailView(LoginRequiredMixin, DetailView):
-    template_name = "web/portfolio.html"
-    def get_queryset(self):
-        if not self.request.user.is_superuser:
-            u_role = self.request.user.profile.role
-            if u_role == Profile.RoleValues.developer:
-                return Portfolio.objects.filter(user=self.request.user)
-            else:
-                raise Http404("No portfolio is available for users who are %s" % u_role)
-        else:
-            raise Http404("No portfolio is available for superusers")

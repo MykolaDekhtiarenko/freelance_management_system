@@ -3,9 +3,8 @@
 {% block content %}
 
 <h1>Профіль</h1>
-    <ul>
-{% for portfolio in object_list %}
-    <li>
+{% if portfolio %}
+    <div>
         <h3>About:</h3>
         <p>{{ portfolio.about }}</p>
         <h3>Education:</h3>
@@ -14,10 +13,9 @@
         <p>{{ portfolio.experience }}</p>
         <h3>Telephone:</h3>
         <p>{{ portfolio.phone }}</p>
-    </li>
-{% empty %}
-    <li>No applications yet.</li>
-{% endfor %}
+    </div>
+{% else %}
+    <div>No portfolio yet.</div>
+{% endif %}
 
-</ul>
 {% endblock %}

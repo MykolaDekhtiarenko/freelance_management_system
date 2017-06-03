@@ -3,8 +3,8 @@ from django.contrib.auth import views
 from web.views import *
 # We are adding a URL called /home
 urlpatterns = [
-    url(r'applications', MyApplicationsListView.as_view()),
-    url(r'portfolio', PortfolioDetailView.as_view()),
+    url(r'^applications', MyApplicationsListView.as_view()),
+    url(r'^portfolio', portfolio),
     url(r'^projects', AllProjectsListView.as_view()),
     url(r'^myprojects', MyProjectsListView.as_view()),
     url(r'^$', home),
