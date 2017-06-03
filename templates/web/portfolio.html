@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Профіль</h1>
+    <ul>
+{% for portfolio in object_list %}
+    <li>
+        <h3>About:</h3>
+        <p>{{ portfolio.about }}</p>
+        <h3>Education:</h3>
+        <p>{{ portfolio.education }}</p>
+        <h3>Experience:</h3>
+        <p>{{ portfolio.experience }}</p>
+        <h3>Telephone:</h3>
+        <p>{{ portfolio.phone }}</p>
+    </li>
+{% empty %}
+    <li>No applications yet.</li>
+{% endfor %}
+
+</ul>
+{% endblock %}
