@@ -40,10 +40,19 @@ class MyProjectsListView(LoginRequiredMixin, ListView):
             elif self.request.user.profile.role == Profile.RoleValues.developer:
                 return Project.objects.filter(applications__user=self.request.user).filter(applications__status__exact=Application.StatusValues.accepted)
         else:
-            raise Http404("No portfolio is available for superuser")
+            raise Http404("No projects are available for superuser")
 
 class MyApplicationsListView(LoginRequiredMixin, ListView):
     template_name = "web/myapplications.html"
     paginate_by = 10
     def get_queryset(self):
         return Application.objects.filter(user=self.request.user)
+
+class MyTasksListView(LoginRequiredMixin, ListView):
+    template_name = "web/mytasks.html"
+    paginate_by = 10
+    def get_queryset(self):
+        if not self.request.user.is_superuser:
+            return Task.objects.filter(developers=self.request.user)
+        else:
+            raise Http404("No tasks are available for superuser")

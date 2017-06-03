@@ -5,6 +5,7 @@ from web.views import *
 urlpatterns = [
     url(r'^applications', MyApplicationsListView.as_view()),
     url(r'^portfolio', portfolio),
+    url(r'^tasks', MyTasksListView.as_view()),
     url(r'^projects', AllProjectsListView.as_view()),
     url(r'^myprojects', MyProjectsListView.as_view()),
     url(r'^$', home),

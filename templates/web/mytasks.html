@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Мої завдання</h1>
+    <ul>
+{% for task in object_list %}
+    <div>
+        <h3>{{ task.project.name }}</h3>
+        <div> {{ task.description }}</div>
+        <p>Stage: </p>
+        <div> {{ task.stage }}</div>
+        <p>Deadline: </p>
+        <div> {{ task.deadline }}</div>
+    </div>
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+
+</ul>
+{% endblock %}
