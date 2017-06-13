@@ -1,0 +1,118 @@
+@import "../config.less";
+
+.grid {
+  position:absolute;
+  left:-100%;
+}
+.grid-item {
+  height: 100px;
+  margin-top:10px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  transition: transform 1.2s;
+}
+.grid-a{
+    margin-left:30px;
+}
+
+@media(min-width:992px){
+    .grid-item.is-moved {
+      transform: translateX(175%);
+      }
+}
+@media(max-width:992px){
+    .grid-item.is-moved {
+      transform: translateX(100%);  
+    }
+}
+.square-box{
+    width:100px;
+    min-height:100px;
+    margin-right:22px;
+    text-align:center!important;
+    padding:20px 0;
+}
+
+.info-box{
+    margin:20px;
+    padding-top:2px;
+}
+.button {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 15px 10px;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.button:after {
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.button-5b:hover span {
+    -webkit-transform: translateY(200%);
+    -moz-transform: translateY(200%);
+    -ms-transform: translateY(200%);
+    transform: translateY(200%);
+    color:white;
+}
+.button-5b>.fa {
+    left: 0;
+    top: -170%;
+    color:white;
+
+}
+.button-5b:hover>.fa {
+    left: 0;
+    top:-10px;
+    font-weight:200;
+    color:white;
+
+}
+.button-5 {
+    color: #fff;
+    min-height: 40px;
+    line-height: 24px;
+    font-size: 16px;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.button-5:active {
+    top: 2px;
+}
+.button-5 span {
+    display: inline-block;
+    -webkit-transition: all 0.3s;
+    -webkit-backface-visibility: hidden;
+    -moz-transition: all 0.3s;
+    -moz-backface-visibility: hidden;
+    transition: all 0.3s;
+    backface-visibility: hidden;
+}
+.button-5>.fa {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color:white;
+    line-height: 2.5;
+    font-size: 180%;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
