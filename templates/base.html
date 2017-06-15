@@ -1,40 +1,44 @@
-
 <html>
-    <head>
-        <!--METADATA-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale = 1.0">
-        <meta name="description" content="End-to-end project development for employers and employees"/>
-        {% load staticfiles %}
+<head>
+    <!--METADATA-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale = 1.0">
+    <meta name="description" content="End-to-end project development for employers and employees"/>
+    {% load compile_static %}
+    {% load staticfiles %}
 
-        <!--JQUERY-->
-        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-        <!--BOOTSTRAP-->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!--BOOTSTRAP-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!--LESS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+    <!--LESS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 
-        <!--CUSTOM IMPORTS-->
-        <link rel="stylesheet" type="text/less" href="{% static "web/css/config.less" %}">
-        <link rel="stylesheet" type="text/less" href="{% static "web/css/topbar.less" %}">
+    <!--CUSTOM IMPORTS-->
+    <link rel="stylesheet" href="{% static "web/css/topbar.less"|compile %}">
 
 
-    </head>
-    <body>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-                <a class="navbar-brand">
-                    <div class="navbar-brand-wrapper">
-                        <svg version="1.1" id="layer-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            </button>
+            <a class="navbar-brand">
+                <div class="navbar-brand-wrapper">
+                    <svg version="1.1" id="layer-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="50px" height="50px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
                             <defs>
                                 <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -74,36 +78,47 @@
                             c0-98.48-79.834-178.315-178.314-178.315c-98.481,0-178.314,79.835-178.314,178.315C54.459,358.664,134.292,438.498,232.773,438.498
                             z M232.773,110.353c82.748,0,149.829,67.079,149.829,149.83c-0.001,82.749-67.081,149.831-149.829,149.831
                             c-82.752,0-149.829-67.082-149.829-149.831C82.944,177.432,150.021,110.353,232.773,110.353z"/>
-                        </svg><span id="navbar-brand-name"><span id="navbar-brand-dev">Dev</span>Idea</span>
-                    </div>
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Головна</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Проекти<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Всі проекти</a></li>
-                    <li><a href="#">Мої проекти</a></li>
-                    <li><a href="#">Мої заявки</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://organicthemes.com/demo/profile/files/2012/12/profile_img.png" class="profile-picture img-circle" style="max-height:40px;">  Nick2208  <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Профіль</a></li>
-                    <li><a href="#">Налаштування</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Вийти</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div>
-        {% block content %}{% endblock content %}
+                        </svg>
+                    <span id="navbar-brand-name"><span id="navbar-brand-dev">Dev</span>Idea</span>
+                </div>
+            </a>
         </div>
-    </body>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.profile.role == 'D' or user.profile.role == 'C' %}
+                    <li><a href="/myprojects">Мої проекти</a></li>
+                {% endif %}
+                {% if user.profile.role == 'D' %}
+                    <li><a href="/">Мої заявки</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><img
+                                src="https://organicthemes.com/demo/profile/files/2012/12/profile_img.png"
+                                class="profile-picture img-circle" style="max-height:40px;"> {{ user.username }} <span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Профіль</a></li>
+                            <li><a href="#">Налаштування</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Вийти</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    {% if "signup" not in request.get_full_path %}
+                        <li><a href="/signup">Зареєструватися</a></li>
+                    {% endif %}
+                    {% if "login" not in request.get_full_path %}
+                        <li><a href="/login">Увійти</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div>
+    {% block content %}{% endblock content %}
+</div>
+</body>
 </html>

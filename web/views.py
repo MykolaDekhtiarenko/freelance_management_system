@@ -9,7 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required(login_url="/login")
 def home(request):
-    return render(request, "web/home.html")
+    return render(request, "web/projects.html")
+
+def signup(request):
+    return render(request, "registration/registration.html")
 
 @login_required(login_url="/login")
 def portfolio(request):
@@ -25,13 +28,13 @@ def portfolio(request):
     else:
         raise Http404("No portfolio is available for superusers")
 
-class AllProjectsListView(LoginRequiredMixin, ListView):
+class AllProjectsListView(ListView):
     model = Project
-    template_name = "web/allprojects.html"
+    template_name = "web/projects.html"
     paginate_by = 10
 
 class MyProjectsListView(LoginRequiredMixin, ListView):
-    template_name = "web/myprojects.html"
+    template_name = "web/projects.html"
     paginate_by = 10
     def get_queryset(self):
         if not self.request.user.is_superuser:
