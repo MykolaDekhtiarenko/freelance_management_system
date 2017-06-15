@@ -1,5 +1,28 @@
 @import "../config.less";
 
+
+.top-segment{
+    display:none;
+    height:160px; 
+    position:relative; 
+}
+.top-segment p{
+    font-size:60px;
+    font-family:Roboto;
+    color:@mainThemeColor;
+    text-transform: uppercase;
+    margin-top:50px;
+    text-align: center;
+}
+.demo{
+    position:relative;
+    height:100px;
+}
+.outline {
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border: 5px solid @mainThemeColor;
+}
+//Project cards part
 .grid {
   position:absolute;
   left:-100%;
@@ -21,9 +44,13 @@
       }
 }
 @media(max-width:992px){
+    .grid-item{
+        height: 130px;
+    }
     .grid-item.is-moved {
       transform: translateX(100%);  
     }
+
 }
 .square-box{
     width:100px;

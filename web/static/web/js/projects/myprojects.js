@@ -29,3 +29,7 @@ function getToggleItemMove( i ) {
   }
 }
 
+$(document).ready(function(){ 
+    $('.top-segment').fadeIn(2000,function(){
+     });    
+});
