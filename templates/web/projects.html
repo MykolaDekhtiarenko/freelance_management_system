@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load compile_static %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "web/css/myprojects.less"|compile %}">
+    <h2><center>Усі проекти</center></h2>
+    <div class="grid grid-a col-xs-12 col-md-8 col-md-offset-2">
+        {% for project in object_list %}
+            <div class="grid-item">
+                <div class="square-box pull-right">
+                    <a href="/project/{{ project.id }}" type="submit" class=" button button-5 button-5b icon-cart"><i
+                            class="fa fa-arrow-right"></i><span> Деталі </span></a>
+                </div>
+                <div class="info-box">
+                    <h2> {{ project.name }}</h2>
+                    <text><span>Deadline:</span> {{ project.endDate }}</text>
+                </div>
+            </div>
+        {% empty %}
+            <h2>
+                <center>No projects yet:(</center>
+            </h2>
+        {% endfor %}
+    </div>
+    <div class="grid col-xs-12 col-md-8 col-md-offset-2"></div>
+
+    <script src="{% static "web/js/myprojects.js" %}"></script>
+
+
+{% endblock %}

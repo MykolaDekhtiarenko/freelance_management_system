@@ -9,7 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required(login_url="/login")
 def home(request):
-    return render(request, "web/home.html")
+    return render(request, "web/projects.html")
+
+def signup(request):
+    return render(request, "registration/registration.html")
 
 @login_required(login_url="/login")
 def portfolio(request):
@@ -25,13 +28,13 @@ def portfolio(request):
     else:
         raise Http404("No portfolio is available for superusers")
 
-class AllProjectsListView(LoginRequiredMixin, ListView):
+class AllProjectsListView(ListView):
     model = Project
-    template_name = "web/allprojects.html"
+    template_name = "web/projects.html"
     paginate_by = 10
 
 class MyProjectsListView(LoginRequiredMixin, ListView):
-    template_name = "web/myprojects.html"
+    template_name = "web/projects.html"
     paginate_by = 10
     def get_queryset(self):
         if not self.request.user.is_superuser:
@@ -56,3 +59,25 @@ class MyTasksListView(LoginRequiredMixin, ListView):
             return Task.objects.filter(developers=self.request.user)
         else:
             raise Http404("No tasks are available for superuser")
+
+class ProjectDetailView(LoginRequiredMixin, DetailView):
+    template_name = "web/project.html"
+    queryset = Project.objects.all()
+
+    def get_object(self):
+        obj = super(ProjectDetailView, self).get_object()
+        print(obj)
+        if obj.stage == Project.StageValues.preparation:
+            print("Preparation case;")
+            return obj
+        elif obj.creator == self.request.user:
+            print("Current user is owner;")
+            return obj
+        elif obj.stage == Project.StageValues.development:
+            print("Development case;")
+            if self.request.user in User.objects.filter(application__project=obj).filter(application__status__exact=Application.StatusValues.accepted):
+                print("Current user is one of the developers;")
+                return obj
+            else:
+                print("Current user is not one of the developers;")
+                raise Http404("")

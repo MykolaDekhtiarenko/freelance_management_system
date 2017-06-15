@@ -1,30 +1,12 @@
-<html>
-    <head>
-        <!--METADATA-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale = 1.0">
-        <meta name="description" content="End-to-end project development for employers and employees"/>
-    
-        <!--JQUERY-->
-         <script type="text/javascript" src="../../web/static/web/libs/jquery-3.2.1.min.js"></script>
-         <link rel="stylesheet" href="../../web/static/web/css/config.less">
+{% extends 'base.html' %}
 
-        <!--BOOTSTRAP-->
-        <link rel="stylesheet" href="../../web/static/web/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-        <script type="text/javascript" src="../../web/static/web/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-       
-        <!--FONTS-->
-        
-        <!--CUSTOM IMPORTS-->
-        <link rel="stylesheet/less" href="../../web/static/web/css/general/registration.less">
-        <link rel="stylesheet/less" href="../../web/static/web/css/config.less">
-        <script src="../../web/static/web/js/general/registration.js"></script>
-        <!--LESS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
-        
-    </head>
-    <body>
-        <div class="container">    
+{% block content %}
+        {% load compile_static %}
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static "web/css/registration.less"|compile %}">
+        <script src="{% static "web/js/registration.js" %}"></script>
+
+        <div class="container">
             <div id="registration" class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"> 
                 <div class="panel panel-default" >
                     <div class="panel-heading">
@@ -319,6 +301,4 @@
             c-0.049-0.366-0.046-0.739-0.025-1.11c0.009-0.125,0.024-0.25,0.042-0.375C12.122,17.814,12.141,17.732,12.164,17.65z"></path>
           </g>
         </svg></div>
-
-    </body>
-</html>
+{% endblock %}
