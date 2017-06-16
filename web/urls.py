@@ -10,8 +10,7 @@ urlpatterns = [
     url(r'^myprojects', MyProjectsListView.as_view()),
     url(r'^project/(?P<pk>\d+)/$', ProjectDetailView.as_view()),
     url(r'^signup$', signup),
-    url(r'^login/$', views.login, {'template_name': 'registration/login.html'}, name='login'),
-    url(r'^logout/$', views.logout, {'next_page': '/login'}),
-    url(r'^accounts/login/$', views.login, {'template_name': 'registration/login.html'}, name='login'),
+    url(r'^(accounts/)?logout/$', views.logout, {'next_page': '/login'}),
+    url(r'^(accounts/)?login/$', views.login, {'template_name': 'registration/login.html'}, name='login'),
 
 ]
