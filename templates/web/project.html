@@ -4,18 +4,30 @@
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static "web/css/room.less"|compile %}">
         <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">
-
+    <div class="room">
         <div class=" task-grid col-sm-9">
-            <div class="task-item col-sm-4">
+
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+              </div>
+
+            </div>
+            <div class="task-item col-sm-3">
+                <div class="card">
+                    <p class="details"> Деталі</p>
+                </div>
+            </div>
+          <div class="task-item col-sm-3">
+                <div class="card">
+                    <p class="details"> Деталі</p>
+                </div>
+            </div>
+            <div class="task-item col-sm-3">
                 <div class="card"></div>
             </div>
-          <div class="task-item col-sm-4">
-                <div class="card"></div>
-            </div>
-            <div class="task-item col-sm-4">
-                <div class="card"></div>
-            </div>
-            <div class="task-item col-sm-4">
+            <div class="task-item col-sm-3">
                 <div class="card"></div>
             </div>
         </div>
@@ -23,6 +35,7 @@
         <div class="chat col-sm-3">
              <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right"></div>
             <div class="chat-room "></div>
+        </div>
         </div>
       <script src="{% static "web/js/room.js" %}"></script>
 
