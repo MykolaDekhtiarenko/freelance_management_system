@@ -11,4 +11,4 @@ src/*.egg-info
 lib
 lib64
 .idea
-staticfiles
+staticfilessuper_env/
