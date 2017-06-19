@@ -4,37 +4,80 @@
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static "web/css/room.less"|compile %}">
         <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">
-    <div class="room">
-        <div class=" task-grid col-sm-9">
 
+    <div class="room">
+        <div class=" task-grid col-xs-12 col-sm-9">
+            <div class="container-fluid">
+            <div class="settingsbar col-xs-12">
+                 <button id="add" class="button">ДОДАТИ</button>
+            </div>
+            </div>
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <span class="close">&times;</span>
                 <p>Some text in the Modal..</p>
               </div>
-
             </div>
-            <div class="task-item col-sm-3">
+             <div id="addTask" class="task">
+                <div class="task-content">
+                    <div class="close">&times;</div>
+                    <div class="content">
+                    <div class="form-group">
+                            <label for="usr">Опис:</label>
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <label for="pwd">Дедлайн:</label>
+                            <input type="password" class="form-control" id="pwd">
+                            <div class="picker">
+                                <label for="selectpicker">Учасники:</label>
+                                <select class="selectpicker" multiple data-live-search="true" show-tick>
+                                  <option>Mustard</option>
+                                  <option>Ketchup</option>
+                                  <option>Relish</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit"  class="button button-task-create">СТВОРИТИ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="task-item col-sm-4">
+                <div class="card">
+                    <div class="information">
+                    <p class="deadline">23.04.2017</p>
+                    <p class="description">Додати нову сторінку нарешті!</p>
+                        <button class="details glyphicon glyphicon-menu-right"> </button>
+                    </div>
+                </div>
+            </div>
+          <div class="task-item col-sm-4">
                 <div class="card">
                     <p class="details"> Деталі</p>
                 </div>
             </div>
-          <div class="task-item col-sm-3">
-                <div class="card">
-                    <p class="details"> Деталі</p>
-                </div>
-            </div>
-            <div class="task-item col-sm-3">
+            <div class="task-item col-sm-4">
                 <div class="card"></div>
             </div>
-            <div class="task-item col-sm-3">
+            <div class="task-item col-sm-4">
                 <div class="card"></div>
             </div>
         </div>
 
-        <div class="chat col-sm-3">
-             <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right"></div>
-            <div class="chat-room "></div>
+        <div class="chat hidden-xs hidden-sm col-md-3">
+             <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
+            <div class="chat-room ">
+                 <div id="messages">
+
+                 </div>
+                 <div id="send">
+                     <div class="form-group col-md-10 ">
+                         <textarea class="form-control" rows="3" id="comment"></textarea>
+                     </div>
+                     <div class="button-wrapper col-md-2">
+                     <button type="submit"  class=" button-send glyphicon glyphicon-menu-right"></button>
+                     </div>
+                 </div>
+
+            </div>
         </div>
         </div>
       <script src="{% static "web/js/room.js" %}"></script>
