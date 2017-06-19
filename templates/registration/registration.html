@@ -13,15 +13,16 @@
                         <div class="panel-title text-center">Реєстрація</div>
                     </div>     
                     <div class="panel-body" >
-                        <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
-
+                        <div class="errornote text-center" id="registration_error"></div>
+                        <form name="form" id="registration_form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="name" value="" placeholder="Ім'я">                                        
+                                <input id="first_name" type="text" class="form-control" name="name" value="" placeholder="Ім'я">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="surname" value="" placeholder="Прізвище">                                        
+                                <input id="last_name" type="text" class="form-control" name="surname" value="" placeholder="Прізвище">
                             </div>
 
                             <div class="input-group">
@@ -30,20 +31,20 @@
                             </div>     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="password" type="password" class="form-control" name="email" placeholder="Поштова скринька">
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Поштова скринька">
                             </div>
                                 <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-th-list"></i></span>
                                 <select class="form-control" id="options" name="type">
-                                  <option class="form-control">Розробник</option>
-                                  <option class="form-control">Замовник</option>
+                                  <option class="form-control" id="D">Розробник</option>
+                                  <option class="form-control" id="C">Замовник</option>
                                 </select>
                                 </div>
                             
                             <div class="form-group align-center">
                                 <!-- Button -->
                                 <div class="col-xs-12 controls ">
-                                    <button type="submit" class="col-xs-12 button button-5 button-5b icon-cart"><i class="fa fa-arrow-right"></i><span> Зареєструватися </span></button>
+                                    <button id="registration_btn" type="button" class="col-xs-12 button button-5 button-5b icon-cart"><i class="fa fa-arrow-right"></i><span> Зареєструватися </span></button>
                                 </div>
                             </div>
                         </form>     

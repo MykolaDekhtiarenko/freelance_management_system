@@ -25,4 +25,54 @@ $(function(){
         parallax: false
     });
 
+    //Registration here
+     $('#registration_btn').click(function (e) {
+        e.preventDefault();
+        var user_data = {
+             "user": {
+                "password": $('#password').val(),
+                "email": $('#email').val(),
+                "first_name": $('#first_name').val(),
+                "last_name": $('#last_name').val()
+             },
+            "role": $('#options').find('option:selected').attr('id'),
+            "csrfmiddlewaretoken": $('input[name=csrfmiddlewaretoken]').val()
+        };
+        if(user_data.user.first_name.length<=0 || user_data.user.first_name.length>30) {
+            reportError($('#first_name'), 'You should include first name <br>(not more than 30 characters)');
+            return;
+        }
+        if(user_data.user.last_name.length<=0 || user_data.user.last_name.length>30) {
+            reportError($('#last_name'), 'You should include last name <br>(not more than 30 characters)');
+            return;
+        }
+        if(user_data.user.password.length<=0) {
+            reportError($('#password'), 'You should include password');
+            return;
+        }
+        if(user_data.user.email.length<=0
+            || !/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(user_data.user.email)){
+            reportError($('#email'), 'You should include valid email');
+            return;
+        }
+        console.log(user_data);
+        $.ajax({
+            url : "api/profile/",
+            type : "POST",
+            contentType: "application/json",
+            data : JSON.stringify(user_data),
+        success : function(json) {
+            window.location='/';
+        },
+        error : function(xhr,errmsg,err) {
+            console.error(xhr.status + ": " + xhr.responseText);
+        }
+        });
+    });
 });
+
+function reportError(elem, msg) {
+    //TO-DO
+    //elem.addClass('has-danger');
+    $('#registration_error').html(msg);
+}
