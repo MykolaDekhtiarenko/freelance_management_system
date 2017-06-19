@@ -12,8 +12,8 @@ class Project(models.Model):
     name = models.TextField()
     description = models.TextField()
     stage = models.CharField(max_length=1, choices=StageValues.choices, default=StageValues.preparation)
-    startDate = models.DateField
-    endDate = models.DateField
+    startDate = models.DateField(null=True)
+    endDate = models.DateField(null=True)
     chatRoom = models.SlugField(unique=True)
     creator = models.ForeignKey(User, null=False)
 
