@@ -33,6 +33,12 @@
       </tfoot>
     </table>
   </form>
+{#    DEBUG ONLY#}
+    <script>
+        var USERNAME = '{{ user.username }}'
+        var CHATROOM = '{{ project.chatRoom }}'
+    </script>
+{#    EOF DEBUG#}
     <script type="text/javascript" src='{% static "chat/reconnecting-websocket.min.js" %}'></script>
     <script type="text/javascript" src='{% static "chat/chat.js" %}'></script>
 {% endblock content %}
