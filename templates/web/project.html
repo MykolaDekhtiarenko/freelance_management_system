@@ -65,19 +65,20 @@
         <div class="chat hidden-xs hidden-sm col-md-3">
             <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
             <form class="chat-room " id="chatform">
-                <div id="chat">
+                <div id="chat" class="messages">
                     {% for message in project.messages.all %}
                         {% if message.user.username == user.username %}
                             <div class="message_my">
-                                <span>{{ message.formatted_timestamp }}</span>
-                                <span>{{ message.user.username }}</span>
-                                <span>{{ message.message }}</span>
+                                <span class="username">{{ message.user.username }}</span>
+                                <text class="my-message">{{ message.message }}
+                                 <div class="timestamp">{{ message.formatted_timestamp }}</div>
+                                </text>
                             </div>
                         {% else %}
                             <div class="message_other">
-                                <span>{{ message.formatted_timestamp }}</span>
-                                <span>{{ message.user.username }}</span>
-                                <span>{{ message.message }}</span>
+                                <span class="username">{{ message.user.username }}</span>
+                                <div class="other-message">{{ message.message }}</div>
+                                <span class="timestamp">{{ message.formatted_timestamp }}</span>
                             </div>
                         {% endif %}
                         {% empty %}
@@ -85,10 +86,8 @@
                     {% endfor %}
                 </div>
                 <div id="send">
-                    <div class="form-group col-md-10 ">
+                    <div class="input-group send-message ">
                         <textarea id="message" class="form-control" rows="3" autofocus></textarea>
-                    </div>
-                    <div class="button-wrapper col-md-2">
                         <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>
                     </div>
                 </div>
@@ -100,11 +99,7 @@
         var USERNAME = '{{ user.username }}'
         var CHATROOM = '{{ project.chatRoom }}'
     </script>
-{#    DEBUG ONLY STYLES#}
-    <style>
-        .message_my{background-color: green}
-        .message_other{background-color: #1b6d85}
-    </style>
+
     <script src="{% static "web/js/room.js" %}"></script>
     <script type="text/javascript" src='{% static "chat/reconnecting-websocket.min.js" %}'></script>
     <script type="text/javascript" src='{% static "chat/chat.js" %}'></script>

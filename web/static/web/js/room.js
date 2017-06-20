@@ -14,6 +14,8 @@ $(document).ready(function(event,event2){
                  $(this).toggleClass('glyphicon glyphicon-menu-left glyphicon glyphicon-menu-right');
              }
     });
+     var objDiv = $('.messages');
+    objDiv.scrollTop = objDiv.scrollHeight;
     var modal = $('#myModal');
     var btn = $(".details");
     var span=$(".close");
@@ -52,5 +54,6 @@ $(document).ready(function(event,event2){
     var myDiv = $('.description');
     myDiv.text(myDiv.text().substring(0,30));
     myDiv.append("...");
+
 });
 
