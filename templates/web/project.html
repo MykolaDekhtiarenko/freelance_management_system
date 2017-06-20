@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static "web/css/room.less"|compile %}">
     <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">
 
-    <div class="room">
+    <div class="room container-fluid">
         <div class=" task-grid col-xs-12 col-sm-9">
             <div class="container-fluid">
                 <div class="settingsbar col-xs-12">
@@ -64,35 +64,40 @@
 
         <div class="chat hidden-xs hidden-sm col-md-3">
             <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
-            <form class="chat-room " id="chatform">
+            <div class="chat-room " id="chatform">
                 <div id="chat" class="messages">
                     {% for message in project.messages.all %}
                         {% if message.user.username == user.username %}
-                            <div class="message_my">
-                                <span class="username">{{ message.user.username }}</span>
-                                <text class="my-message">{{ message.message }}
-                                 <div class="timestamp">{{ message.formatted_timestamp }}</div>
-                                </text>
+                            <div class="username my-username">You:</div>
+                            <div class="message-container">
+                                <div class="message my-message">
+                                    <div class="message-text">{{ message.message }}</div>
+                                    <div class="timestamp">{{ message.formatted_timestamp }}</div>
+                                </div>
                             </div>
                         {% else %}
-                            <div class="message_other">
-                                <span class="username">{{ message.user.username }}</span>
-                                <div class="other-message">{{ message.message }}</div>
-                                <span class="timestamp">{{ message.formatted_timestamp }}</span>
+                            <div class="username">{{ message.user.first_name }} {{ message.user.last_name }}:</div>
+                            <div class="message-container">
+                                <div class="message">
+                                    <div class="message-text">{{ message.message }}</div>
+                                    <div class="timestamp">{{ message.formatted_timestamp }}</div>
+                                </div>
                             </div>
                         {% endif %}
-                        {% empty %}
-                         No messages yet
+                    {% empty %}
+                        No messages yet
                     {% endfor %}
                 </div>
                 <div id="send">
-                    <div class="input-group send-message ">
-                        <textarea id="message" class="form-control" rows="3" autofocus></textarea>
-                        <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>
-                    </div>
-                </div>
+{#                    <div class="input-group send-message ">#}
+{#                        <textarea id="message" class="form-control" rows="3" autofocus></textarea>#}
+{#                        <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>#}
+{#                    </div>#}
+            </div>
 
-            </form>
+
+            </div>
+
         </div>
     </div>
     <script>
