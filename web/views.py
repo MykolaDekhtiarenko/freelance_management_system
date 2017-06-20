@@ -6,9 +6,6 @@ from django.views.generic import DetailView
 from api.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from chat.models import Message
-
-
 @login_required(login_url="/login")
 def home(request):
     return render(request, "web/projects.html")
@@ -85,10 +82,3 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
             else:
                 print("Current user is not one of the developers;")
                 raise Http404("")
-    # # NOT RIGHT AT ALL!!! WRONG SOLUTION
-    # chatMessages = Message.objects.filter(project=)
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProjectDetailView, self).get_context_data(**kwargs)
-    #     context['chatMessages'] = self.chatMessages
-    #     return context
