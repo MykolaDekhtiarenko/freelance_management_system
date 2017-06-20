@@ -12,10 +12,51 @@
                     <button id="add" class="button">ДОДАТИ</button>
                 </div>
             </div>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
+            <div id="myModal" class="modal ">
+                <div class="modal-content ">
                     <span class="close">&times;</span>
-                    <p>Some text in the Modal..</p>
+                    <div class="input-group modal-information col-xs-12">
+                         <div class="modal-description col-xs-12">
+                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+                                                      <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+
+                         </div>
+                         <div class="group">
+                             <label for="group"> Учасники: </label>
+                             <span class="member"> panna </span> <span class="member">g_f0x</span>
+                         </div>
+                         <label for="modal-deadline"> Зробити до:  </label>
+                         <span class="modal-deadline"> 23.04.2017 </span>
+                         <div class="picker">
+                                <label for="selectpicker">Стан:</label>
+                                <select class="selectpicker">
+                                    <option>Posted</option>
+                                    <option>In progress</option>
+                                    <option>Done</option>
+                                </select>
+                         </div>
+                        <div class="comments-group">
+
+                        <hr>
+                        <textarea class="form-control" rows="5"></textarea>
+                            <div class="col-xs-12"><button type="submit" class="button-send">Надіслати</button></div>
+                            <p class="comments-header"> Коментарі </p>
+                            <hr>
+                            <div class="comment">
+                                <p>Tue, 20 Jun 2017 16:01 by <b>Panna</b></p>
+                                <div class="comment-content">
+                                     <p> Окей, беруся за це</p>
+                                </div>
+                                <hr>
+
+                            </div>
+
+                    </div>
+                    </div>
+
                 </div>
             </div>
             <div id="addTask" class="task">
@@ -23,10 +64,26 @@
                     <div class="close">&times;</div>
                     <div class="content">
                         <div class="form-group">
+                            <h2 class="add-task-header"> Додати завдання</h2>
                             <label for="usr">Опис:</label>
                             <textarea class="form-control" rows="5" id="comment"></textarea>
-                            <label for="pwd">Дедлайн:</label>
-                            <input type="password" class="form-control" id="pwd">
+
+                            <label> Дедлайн: </label>
+
+                            <div class='input-group input-group-lg date' id='datetimepicker1'>
+                                <input type='text' id="datetime" required class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker1').datetimepicker({
+                                        format: 'DD.MM.YYYY'
+                                    });
+                                });
+                            </script>
+
                             <div class="picker">
                                 <label for="selectpicker">Учасники:</label>
                                 <select class="selectpicker" multiple data-live-search="true" show-tick>
@@ -88,7 +145,6 @@
                 <div id="send">
                     <div class="input-group send-message ">
                         <textarea id="message" class="form-control" rows="3" autofocus></textarea>
-                        <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>
                     </div>
                 </div>
 

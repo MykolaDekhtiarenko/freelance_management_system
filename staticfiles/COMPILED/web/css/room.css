@@ -101,27 +101,6 @@
     float: right;
     color: lightgrey;
   }
-  .button-send {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    vertical-align: middle;
-    background: white;
-    border: 3px solid #0dada8;
-    color: #0dada8;
-  }
-  .button-send:hover {
-    background-color: #0dada8;
-    color: white;
-    border: 3px solid #0dada8;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-  .button-send:focus {
-    outline: 0;
-  }
 }
 .container-fluid {
   padding-left: 0px;
@@ -160,7 +139,7 @@
   margin-top: 10px;
 }
 .information {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('http://s019.radikal.ru/i609/1706/79/f6e0b870a4b4.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('http://i066.radikal.ru/1706/9b/aa6e970a6feb.png');
   min-height: 300px;
 }
 .deadline {
@@ -229,7 +208,64 @@
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 60%;
+}
+.modal-information {
+  margin-top: 40px;
+}
+.modal-description {
+  height: 100%;
+  background-color: #0dada8;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+.modal-description p {
+  padding: 10px 10px;
+}
+.member {
+  height: 20px;
+  color: white;
+  border-radius: 3px;
+  margin: 0px 5px;
+  padding: 5px;
+}
+.comments-group {
+  margin-top: 30px;
+}
+.comments-header {
+  color: #0dada8;
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.comment-content {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 5px 5px 5px;
+  padding: 10px;
+  min-height: 50px;
+}
+.button-send {
+  margin-top: 10px;
+  float: right;
+  padding: 5px 30px;
+  background: white;
+  border: 3px solid #0dada8;
+  color: #0dada8;
+  text-transform: uppercase;
+}
+.button-send:hover {
+  background-color: #0dada8;
+  color: white;
+  border: 3px solid #0dada8;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.button-send:focus {
+  outline: 0;
 }
 /* The Close Button */
 .close {
@@ -237,7 +273,6 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 30px;
 }
 .close:hover,
 .close:focus {
@@ -279,6 +314,12 @@
 .content {
   margin-top: 50px;
   background-color: white;
+}
+.add-task-header {
+  text-align: center;
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  color: #0dada8;
 }
 .picker {
   margin-top: 10px;
