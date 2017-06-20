@@ -32,6 +32,8 @@ class AllProjectsListView(ListView):
     model = Project
     template_name = "web/projects.html"
     paginate_by = 10
+    def get_queryset(self):
+        return Project.objects.filter(stage=Project.StageValues.preparation)
 
 class MyProjectsListView(LoginRequiredMixin, ListView):
     template_name = "web/projects.html"
