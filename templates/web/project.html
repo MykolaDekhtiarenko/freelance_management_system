@@ -66,7 +66,7 @@
             <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
             <form class="chat-room " id="chatform">
                 <div id="chat">
-                    {% for message in project.message_set.all %}
+                    {% for message in project.messages.all %}
                         {% if message.user.username == user.username %}
                             <div class="message_my">
                                 <span>{{ message.formatted_timestamp }}</span>
@@ -86,7 +86,7 @@
                 </div>
                 <div id="send">
                     <div class="form-group col-md-10 ">
-                        <textarea id="message" class="form-control" rows="3" ></textarea>
+                        <textarea id="message" class="form-control" rows="3" autofocus></textarea>
                     </div>
                     <div class="button-wrapper col-md-2">
                         <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>

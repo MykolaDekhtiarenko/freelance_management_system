@@ -19,10 +19,19 @@ $('#chatform').on('submit', function(event) {
 
 chat_socket.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $('#chat').append('<div'
-        +((message.user===USERNAME)?'class="message_my"':'class="message_other"')
+    $('#chat').append('<div '
+        +((data.user===USERNAME)?'class="message_my"':'class="message_other"')
         +'>'+ '<span>' + data.timestamp + '</span>'
-        + '<span>' + data.user + '</span>'
-        + '<span>' + data.message + ' </span>'
+        + ' <span>' + data.user + '</span>'
+        + ' <span>' + data.message + ' </span>'
     + '</div>');
 };
+
+$('#message').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)
+  {
+    $('#chatform').submit();
+    return false;
+  }
+});
