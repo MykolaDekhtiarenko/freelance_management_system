@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900');
+@media (min-width: 992px) {
+  body {
+    overflow-x: hidden;
+  }
+  .room {
+    position: relative;
+    height: 100%;
+  }
+  .task-grid {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  .chat {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+  }
+  .toggle {
+    width: 35px;
+    height: 30px;
+    background-color: #0dada8;
+    position: absolute;
+    right: 90%;
+    top: 60px;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .glyphicon {
+    color: white;
+    padding-top: 5px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .chat-room {
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    border-left: 1px solid #e8e8e8;
+  }
+  #send {
+    height: 15%;
+    background: #e8e8e8;
+  }
+  .send-message {
+    display: inline;
+  }
+  #message {
+    vertical-align: middle;
+    width: 80%;
+    margin-left: 5px;
+  }
+  .messages {
+    padding-top: 50px;
+    height: 90%;
+    overflow-x: hidden;
+  }
+  .message-container {
+    margin: 5px;
+    margin-top: 0px;
+  }
+  .message {
+    width: 70%;
+    padding: 5px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    font-size: 14px;
+    color: black;
+    background: #e8e8e8;
+  }
+  .message .timestamp {
+    font-size: 9px;
+    text-align: right;
+  }
+  .my-message {
+    margin-left: 30%;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    color: white;
+    background: #0dada8;
+  }
+  .username {
+    padding-left: 5px;
+    width: 100%;
+    font-size: 12px;
+    color: #0dada8;
+  }
+  .my-username {
+    padding-left: 0px;
+    padding-right: 5px;
+    text-align: right;
+  }
+}
+.container-fluid {
+  padding-left: 0px;
+}
+.button {
+  border: 2px solid #0dada8;
+  color: white;
+  background: #0dada8;
+  padding: 10px 40px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button:after {
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button:hover {
+  background: white;
+  color: #0dada8;
+  border: 2px solid #0dada8;
+}
+.card {
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 300px;
+  margin-top: 10px;
+}
+.information {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('http://i066.radikal.ru/1706/9b/aa6e970a6feb.png');
+  min-height: 300px;
+}
+.deadline {
+  font-size: 50px;
+  font-family: Roboto;
+  font-weight: 200;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  padding-top: 70px;
+}
+.description {
+  color: white;
+  text-align: center;
+  font-size: 15px;
+}
+.details {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin-left: -30px;
+  background: none;
+  border: 3px solid white;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  max-width: 75ch;
+  color: white;
+}
+.details:hover {
+  background-color: white;
+  color: #0dada8;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.details:focus {
+  outline: 0;
+}
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+}
+.modal-information {
+  margin-top: 40px;
+}
+.modal-description {
+  height: 100%;
+  background-color: #0dada8;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+.modal-description p {
+  padding: 10px 10px;
+}
+.member {
+  height: 20px;
+  color: white;
+  border-radius: 3px;
+  margin: 0px 5px;
+  padding: 5px;
+}
+.comments-group {
+  margin-top: 30px;
+}
+.comments-header {
+  color: #0dada8;
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.comment-content {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 5px 5px 5px;
+  padding: 10px;
+  min-height: 50px;
+}
+.button-send {
+  margin-top: 10px;
+  float: right;
+  padding: 5px 30px;
+  background: white;
+  border: 3px solid #0dada8;
+  color: #0dada8;
+  text-transform: uppercase;
+}
+.button-send:hover {
+  background-color: #0dada8;
+  color: white;
+  border: 3px solid #0dada8;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.button-send:focus {
+  outline: 0;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.task {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+/* Modal Content */
+.task-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 5px;
+}
+.content {
+  margin-top: 50px;
+  background-color: white;
+}
+.add-task-header {
+  text-align: center;
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  color: #0dada8;
+}
+.picker {
+  margin-top: 10px;
+}
+.button-task-create {
+  display: block;
+  margin: 0 auto;
+}
