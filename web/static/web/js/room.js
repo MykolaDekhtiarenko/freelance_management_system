@@ -5,6 +5,7 @@ var theOddOnes = $('.member');
                    theOddOnes[i].style.backgroundColor=random_color;
         }
 $(document).ready(function(event,event2){
+    $("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight}, 500);
     $("#toggle").click(function(){
         $(".сhat-room").animate({width:'toggle'},300);
             var hidden = $('.chat-room');

@@ -6,55 +6,62 @@
     <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">
 
     <div class="room container-fluid">
+
         <div class=" task-grid col-xs-12 col-sm-9">
-            <div class="container-fluid">
-                <div class="settingsbar col-xs-12">
-                    <button id="add" class="button">ДОДАТИ</button>
-                </div>
+
+            <div class="col-xs-12">
+                <button id="add" class="button">ДОДАТИ</button>
             </div>
             <div id="myModal" class="modal ">
                 <div class="modal-content ">
                     <span class="close">&times;</span>
                     <div class="input-group modal-information col-xs-12">
-                         <div class="modal-description col-xs-12">
-                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
-                                                      <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
-                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
-                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
-                             <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно сумуватиме</p>
+                        <div class="modal-description col-xs-12">
+                            <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно
+                                сумуватиме</p>
+                            <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно
+                                сумуватиме</p>
+                            <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно
+                                сумуватиме</p>
+                            <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно
+                                сумуватиме</p>
+                            <p> Привіт! Не забудьте додати новий дівчик до нашої сторінки, інакше Аня сильно-сильно
+                                сумуватиме</p>
 
-                         </div>
-                         <div class="group">
-                             <label for="group"> Учасники: </label>
-                             <span class="member"> panna </span> <span class="member">g_f0x</span>
-                         </div>
-                         <label for="modal-deadline"> Зробити до:  </label>
-                         <span class="modal-deadline"> 23.04.2017 </span>
-                         <div class="picker">
-                                <label for="selectpicker">Стан:</label>
-                                <select class="selectpicker">
-                                    <option>Posted</option>
-                                    <option>In progress</option>
-                                    <option>Done</option>
-                                </select>
-                         </div>
+                        </div>
+                        <div class="group">
+                            <label for="group"> Учасники: </label>
+                            <span class="member"> panna </span> <span class="member">g_f0x</span>
+                        </div>
+                        <label for="modal-deadline"> Зробити до: </label>
+                        <span class="modal-deadline"> 23.04.2017 </span>
+                        <div class="picker">
+                            <label for="selectpicker">Стан:</label>
+                            <select class="selectpicker">
+                                <option>Posted</option>
+                                <option>In progress</option>
+                                <option>Done</option>
+                            </select>
+                        </div>
                         <div class="comments-group">
 
-                        <hr>
-                        <textarea class="form-control" rows="5"></textarea>
-                            <div class="col-xs-12"><button type="submit" class="button-send">Надіслати</button></div>
+                            <hr>
+                            <textarea class="form-control" rows="5"></textarea>
+                            <div class="col-xs-12">
+                                <button type="submit" class="button-send">Надіслати</button>
+                            </div>
                             <p class="comments-header"> Коментарі </p>
                             <hr>
                             <div class="comment">
                                 <p>Tue, 20 Jun 2017 16:01 by <b>Panna</b></p>
                                 <div class="comment-content">
-                                     <p> Окей, беруся за це</p>
+                                    <p> Окей, беруся за це</p>
                                 </div>
                                 <hr>
 
                             </div>
 
-                    </div>
+                        </div>
                     </div>
 
                 </div>
@@ -146,11 +153,23 @@
                     {% endfor %}
                 </div>
                 <div id="send">
-{#                    <div class="input-group send-message ">#}
-{#                        <textarea id="message" class="form-control" rows="3" autofocus></textarea>#}
-{#                        <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>#}
-{#                    </div>#}
-            </div>
+                    <div class="input-message-wrapper">
+                        <div class="input-wrapper">
+                            <div class="input-message">
+                                <div class="input-group">
+                                    <input id="message" type="text" class="form-control" placeholder="Повідомлення">
+                                    <span class="input-group-btn">
+                                        <button id="send-message" class="btn btn-default" type="button">Сказати</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#                    <div class="input-group send-message ">#}
+                    {#                        <textarea id="message" class="form-control" rows="3" autofocus></textarea>#}
+                    {#                        <button type="submit" class=" button-send glyphicon glyphicon-menu-right"></button>#}
+                    {#                    </div>#}
+                </div>
 
 
             </div>
