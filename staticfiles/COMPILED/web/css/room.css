@@ -3,16 +3,20 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900');
 @media (min-width: 992px) {
+  body {
+    overflow: hidden;
+  }
   .room {
     position: relative;
     height: 100%;
+    padding-top: 10px;
+    overflow: auto;
   }
   .task-grid {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    padding-top: 10px;
   }
   .chat {
     position: fixed;

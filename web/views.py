@@ -66,7 +66,6 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     queryset = Project.objects.all()
     def get_object(self):
         obj = super(ProjectDetailView, self).get_object()
-        print(obj)
         if obj.stage == Project.StageValues.preparation:
             print("Preparation case;")
             return obj
