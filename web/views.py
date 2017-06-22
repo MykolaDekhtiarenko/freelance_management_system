@@ -67,7 +67,6 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         obj = super(ProjectDetailView, self).get_object()
-        print(obj)
         if obj.stage == Project.StageValues.preparation:
             print("Preparation case;")
             return obj
@@ -82,3 +81,4 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
             else:
                 print("Current user is not one of the developers;")
                 raise Http404("")
+
