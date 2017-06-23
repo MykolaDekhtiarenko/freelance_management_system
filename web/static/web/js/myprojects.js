@@ -31,5 +31,24 @@ function getToggleItemMove( i ) {
 
 $(document).ready(function(){ 
     $('.top-segment').fadeIn(2000,function(){
-     });    
+     });
+
 });
+   var modal = $('#myModal');
+    var btn = $(".add_project_button");
+    var span=$(".close");
+    btn.click(function(){
+        modal.fadeIn(300);
+        modal.css("display","block");
+    });
+    span.click(function(){
+        modal.fadeOut(200);
+    });
+    window.click=function(event){
+        if(event.target==modal){
+            modal.fadeOut(200);
+            modal.css("display","none");
+
+        }
+        event.stopPropagation();
+    }
