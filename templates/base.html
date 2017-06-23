@@ -37,7 +37,7 @@
 </head>
 <body>
 
-<nav class="menubar navbar navbar-default">
+<nav class="menubar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -128,8 +128,8 @@
         </div>
     </div>
 </nav>
-<div>
-    {% block content %}{% endblock content %}
-</div>
+
+<div class="block-content">{% block content %}{% endblock content %}</div>
+
 </body>
 </html>

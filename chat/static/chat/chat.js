@@ -16,19 +16,29 @@ $('#chatform').on('submit', function(event) {
 
 chat_socket.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $('#chat').append('<div '
-        +((data.user===USERNAME)?'class="message_my"':'class="message_other"')
-        +'>'+ '<span>' + data.timestamp + '</span>'
-        + ' <span>' + data.user + '</span>'
-        + ' <span>' + data.message + ' </span>'
-    + '</div>');
+    $('#chat').append(
+        '<div class="username'+ ((data.user===USERNAME)?' my-username':'')+'">You:</div>'+
+        '<div class="message-container">'+
+        '<div class="message'+((data.user===USERNAME)?' my-message':'')+'">'+
+        '<div class="message-text">'+ data.message + '</div>'+
+        '<div class="timestamp">' + data.timestamp + '</div>'+
+        '</div>'+
+        '</div>'
+    );
+    alert( $('#chat').height())
+    $("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight}, 500);
 };
 
 $('#message').keypress(function (e) {
  var key = e.which;
- if(key == 13)
-  {
+ if(key == 13){
     $('#chatform').submit();
     return false;
   }
+});
+
+$('#send-message').on('click', function (e) {
+    e.stopImmediatePropagation();
+    $('#chatform').submit();
+    return false;
 });
