@@ -21,26 +21,29 @@ $(document).ready(function(event,event2){
                  $(this).toggleClass('glyphicon glyphicon-menu-left glyphicon glyphicon-menu-right');
              }
     });
-     var objDiv = $('.messages');
-    objDiv.scrollTop = objDiv.scrollHeight;
-    var modal = $('#myModal');
-    var btn = $(".details");
-    var span=$(".close");
-    btn.click(function(){
+
+
+
+    $(".details").click(function(){
+        var card = $(this).parent().parent();
+        var modal = card.find('#myModal');
         modal.fadeIn(300);
         modal.css("display","block");
     });
-    span.click(function(){
+    $(".close").click(function(){
+        modal = $(this).parent().parent();
         modal.fadeOut(200);
+        modal.css("display","none");
     });
-    window.click=function(event){
-        if(event.target==modal){
-            modal.fadeOut(200);
-            modal.css("display","none");
+    // window.click=function(event){
+    //     if(event.target==$('#myModal')){
+    //         $('#myModal').fadeOut(200);
+    //         $('#myModal').css("display","none");
+    //
+    //     }
+    //     event.stopPropagation();
+    // }
 
-        }
-        event.stopPropagation();
-    }
     var modal2 = $('#addTask');
     var btn2 = $("#add");
     var span2=$(".close");
@@ -58,9 +61,9 @@ $(document).ready(function(event,event2){
             event2.stopPropagation();
         }
     }
-    var myDiv = $('.description');
-    myDiv.text(myDiv.text().substring(0,30));
-    myDiv.append("...");
+    // var myDiv = $('.description');
+    // myDiv.text(myDiv.text().substring(0,30));
+    // myDiv.append("...");
 
 });
 

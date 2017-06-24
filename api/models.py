@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from djchoices import DjangoChoices, ChoiceItem
 
+from freelance_management_system import settings
+
 
 class Project(models.Model):
     class StageValues(DjangoChoices):
@@ -58,7 +60,7 @@ class Task(models.Model):
         done = ChoiceItem("D")
 
     description = models.TextField()
-    deadline = models.DateTimeField()
+    deadline = models.DateField()
     stage = models.CharField(max_length=1, choices=StageValues.choices, default=StageValues.waiting)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     developers = models.ManyToManyField(User)

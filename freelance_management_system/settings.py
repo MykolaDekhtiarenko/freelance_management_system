@@ -162,3 +162,5 @@ CHANNEL_LAYERS = {
         "ROUTING": "chat.routing.channel_routing",
     },
 }
+USE_L10N = True
+# DATE_INPUT_FORMATS = ('%Y-%m-%d')

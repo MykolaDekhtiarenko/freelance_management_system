@@ -1,6 +1,28 @@
 @import "config.less";
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900");
 
+.half-width-parent{
+    width: 100%;
+    display: table;
+}
+
+.half-width{
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.right{
+    text-align: right;
+}
+
+.no-margin{
+    margin: 0px!important;
+}
+
+.no-padding{
+    padding: 0px!important;
+}
 @media(min-width:992px){
     body{
         overflow: hidden;
@@ -224,14 +246,15 @@
         }
         .modal-description{
             height:100%;
-            background-color:@mainThemeColor;
-            color:white;
-            border-radius:5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            margin-bottom:20px;
-            p{
-                padding:10px 10px;
-            }
+            //background-color:@mainThemeColor;
+            //color:white;
+            //border-radius:5px;
+            padding: 5px;
+            //box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            margin-top: 10px;
+            //border-top: 1px solid grey;
+            //border-bottom: 1px solid grey;
 
         }
         .member{
@@ -354,3 +377,5 @@
         .input-message:focus{
             border: hidden;
         }
+
+
