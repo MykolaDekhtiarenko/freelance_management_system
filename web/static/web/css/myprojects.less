@@ -143,3 +143,97 @@
     -moz-transition: all 0.3s;
     transition: all 0.3s;
 }
+.button-wrapper{
+    position:fixed;
+    top:85%;
+    right:20px;
+}
+.add_project_button{
+    width:70px;
+    height:70px;
+    border-radius:35px;
+    background-color:@mainThemeColor;
+    color:white;
+    text-align:center;
+    top:50%;
+    border:none;
+    outline: none;
+     -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.add_project_button:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+        /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    margin-bottom:50px;
+    border: 1px solid #888;
+}
+hr{
+  margin: 0em;
+    margin-bottom:10px;
+}
+.project-header-create{
+    font-family: 'Oswald', sans-serif;
+    font-weight:800;
+    text-align:center;
+    color:@mainThemeShade;
+}
+.add_label{
+    text-transform: uppercase;
+    color:@mainThemeColor;
+    margin-top: 30px;
+    padding: 0;
+
+}
+.button-project-create {
+            border:2px solid @mainThemeColor;
+            color: white;
+            background: @mainThemeColor;
+            padding: 10px 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            outline: none;
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            margin-top:20px;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+.button-project-create:after {
+            position: absolute;
+            z-index: -1;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+.button-project-create:hover{
+            background:white;
+            color:@mainThemeColor;
+            border:2px solid @mainThemeColor;
+
+        }

@@ -20,12 +20,12 @@
                         <div class="form-group">
                             <h2 class="add-task-header"> Додати завдання</h2>
                             <label for="usr">Опис:</label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <textarea class="form-control" rows="5" id="task_descr"></textarea>
 
                             <label> Дедлайн: </label>
 
                             <div class='input-group input-group-lg date' id='datetimepicker1'>
-                                <input type='text' id="datetime" required class="form-control"/>
+                                <input type='text' id="tsk_deadline" required class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -33,21 +33,26 @@
                             <script type="text/javascript">
                                 $(function () {
                                     $('#datetimepicker1').datetimepicker({
-                                        format: 'DD.MM.YYYY'
+                                        format: 'YYYY-MM-DD hh:mm'
                                     });
                                 });
                             </script>
 
                             <div class="picker">
                                 <label for="selectpicker">Учасники:</label>
-                                <select class="selectpicker" multiple data-live-search="true" show-tick>
-                                    <option>Mustard</option>
-                                    <option>Ketchup</option>
-                                    <option>Relish</option>
+                                <select id="task_team" class="selectpicker" multiple data-live-search="true" show-tick>
+                                    {% for user in team %}
+                                        <option>{{ user.username }}</option>
+                                    {% empty %}
+                                       <option disabled> No team for this project yet</option>
+                                    {% endfor %}
+
                                 </select>
                             </div>
+                            <input id="project_id_hidden" type="hidden" value="{{ project.id }}">
+                            {% csrf_token %}
                         </div>
-                        <button type="submit" class="button button-task-create">СТВОРИТИ</button>
+                        <button type="submit" class="button button-task-create" id="add_task_btn">СТВОРИТИ</button>
                     </div>
                 </div>
             </div>
@@ -180,4 +185,5 @@
     <script src="{% static "web/js/room.js" %}"></script>
     <script type="text/javascript" src='{% static "chat/reconnecting-websocket.min.js" %}'></script>
     <script type="text/javascript" src='{% static "chat/chat.js" %}'></script>
+    <script type="text/javascript" src="{% static "web/js/project.js" %}"></script>
 {% endblock %}
