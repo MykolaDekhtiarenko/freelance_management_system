@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+.project-information {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 7px;
+  display:none;
+}
+.project-news-wrapper {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 7px;
+}
+.project-news{
+  padding-left:10px;
+    display:none;
+
+}
+.headers{
+  text-transform: uppercase;
+  color:#0dada8;
+  font-weight:600;
+}
+hr {
+  margin: 0em;
+  margin-bottom: 10px;
+}
+.date{
+  font-size:35px;
+  font-family:'Roboto';
+  font-weight:300;
+}
+.project-news-information{
+  text-align:center;
+}
+.button-apply {
+  border: 2px solid #0dada8;
+  color: white;
+  background: #0dada8;
+  padding: 10px 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom:20px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button-apply:after {
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button-apply:hover {
+  background: white;
+  color: #0dada8;
+  border: 2px solid #0dada8;
+}
+
+.button-appliers {
+  border: 2px solid #0dada8;
+  color: white;
+  background: #0dada8;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom:20px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button-appliers:after {
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button-appliers:hover {
+  background: white;
+  color: #0dada8;
+  border: 2px solid #0dada8;
+}

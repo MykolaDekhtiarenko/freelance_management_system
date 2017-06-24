@@ -67,18 +67,18 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     def get_object(self):
         obj = super(ProjectDetailView, self).get_object()
         if obj.stage == Project.StageValues.preparation:
-            print("Preparation case;")
+            # print("Preparation case;")
             return obj
         elif obj.creator == self.request.user:
-            print("Current user is owner;")
+            # print("Current user is owner;")
             return obj
         elif obj.stage == Project.StageValues.development:
-            print("Development case;")
+            # print("Development case;")
             if self.request.user in User.objects.filter(application__project=obj).filter(application__status__exact=Application.StatusValues.accepted):
-                print("Current user is one of the developers;")
+                # print("Current user is one of the developers;")
                 return obj
             else:
-                print("Current user is not one of the developers;")
+                # print("Current user is not one of the developers;")
                 raise Http404("")
 
     def get_context_data(self, **kwargs):

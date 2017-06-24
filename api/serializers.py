@@ -32,7 +32,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'name', 'description', 'stage',
-                  'chatRoom', 'creator')
+                  'chatRoom', 'creator', 'endDate', 'startDate')
         extra_kwargs = {
             'chatRoom': {
                 'read_only': True

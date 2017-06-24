@@ -6,11 +6,14 @@
 {#    <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">#}
 
     <div class="room container-fluid">
-        <div class="col-xs-12">
+        {% if project.creator == user %}
             <div class="col-xs-12">
-                <button id="add" class="button">ДОДАТИ</button>
+                <div class="col-xs-12">
+                    <button id="add" class="button">ДОДАТИ</button>
+                </div>
             </div>
-        </div>
+        {% endif %}
+
         <div class="task-grid col-xs-12 col-sm-9">
 
             <div id="addTask" class="task">
@@ -42,7 +45,7 @@
                                 <label for="selectpicker">Учасники:</label>
                                 <select id="task_team" class="selectpicker" multiple data-live-search="true" showTick="true">
                                     {% for user in team %}
-                                        <option id="{{ user.id }}">{{ user.username }}</option>
+                                        <option id="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
                                     {% empty %}
                                         <option disabled> No team for this project yet</option>
                                     {% endfor %}
@@ -57,12 +60,14 @@
                     </div>
                 </div>
             </div>
+
             {% for task in project.task_set.all %}
                 <div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="information">
                             <p class="deadline"> {{ task.deadline|date:"d.m.Y" }}</p>
                             <p class="description">{{ task.description }}</p>
+                            <input type="hidden" value="{{ task.id }}">
                             <button id="details" class="details glyphicon glyphicon-menu-right"></button>
                         </div>
                         <div id="myModal" class="modal ">
@@ -89,7 +94,7 @@
                                             <span class="modal-deadline">{{ task.deadline|date:"d.m.Y" }}</span>
                                         </div>
                                         <div class="half-width right">
-                                            <select class="selectpicker">
+                                            <select task_id="{{ task.id }}" class="selectpicker stage-picker">
                                                 <option name="W" {% if task.stage == "W" %}selected{% endif %}>
                                                     Очікування
                                                 </option>
@@ -105,7 +110,6 @@
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="comments-group">
                                         <hr>
                                         <textarea class="form-control" rows="3"></textarea>
@@ -128,13 +132,9 @@
                                             be the first
                                         {% endfor %}
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
 
                     </div>
                 </div>
@@ -144,7 +144,7 @@
         </div>
 
         <div class="chat hidden-xs hidden-sm col-md-3">
-            <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
+            <div id="toggle" class="toggle glyphicon ouricon glyphicon glyphicon-menu-right hidden-sm"></div>
             <div class="chat-room " id="chatform">
                 <div id="chat" class="messages">
                     {% for message in project.messages.all %}
@@ -165,8 +165,6 @@
                                 </div>
                             </div>
                         {% endif %}
-                    {% empty %}
-                        No messages yet
                     {% endfor %}
                 </div>
                 <div id="send">
