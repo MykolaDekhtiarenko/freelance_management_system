@@ -88,19 +88,19 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default="postgres:///postgresql-asymmetrical-77136", conn_max_age=500)
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'freelance_ms',
-    #     'USER': 'root',
-    #     'PASSWORD': 'root',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    #     'TEST': {
-    #      'CHARSET': 'utf8',
-    #      'COLLATION': 'utf8_general_ci',
-    #     }
-    # }
+    # 'default': dj_database_url.config(default="postgres:///postgresql-asymmetrical-77136", conn_max_age=500)
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'freelance_ms',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'TEST': {
+         'CHARSET': 'utf8',
+         'COLLATION': 'utf8_general_ci',
+        }
+    }
 }
 
 # Password validation
