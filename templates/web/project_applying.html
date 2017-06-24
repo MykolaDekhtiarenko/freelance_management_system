@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load compile_static %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "web/css/project_applying.less"|compile %}">
+    <div class="main-wrapper container col-xs-12">
+    <div class="project-information col-xs-12 col-sm-8">
+        <h2> Назва проекту </h2>
+        <text>Опис</text>
+        <hr>
+        <p>Опис лаалалалалалала</p>
+        <div class="date-wrapper col-xs-12">
+            <div class="start_date col-xs-12 col-sm-6">
+                <text> Дата початку</text>
+                <hr>
+                <p> 24.04.2017</p>
+            </div>
+            <div class="end_date col-xs-12 col-sm-6">
+                <text> Дата закінчення</text>
+                <hr>
+                <p>25.04.2017</p>
+            </div>
+        </div>
+    </div>
+    <div class="project-news col-xs-12 col-sm-3 col-sm-offset-1"></div>
+    </div>
+
+
+
+ <script src="{% static "web/js/project_applying.js" %}"></script>
+{% endblock %}
