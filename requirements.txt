@@ -8,7 +8,6 @@ constantly==15.1.0
 daphne==1.2.0
 Django==1.11.2
 dj-database-url==0.4.2
-django-static-precompiler==1.5
 django-choices==1.5.0
 djangorestframework==3.6.3
 incremental==17.5.0

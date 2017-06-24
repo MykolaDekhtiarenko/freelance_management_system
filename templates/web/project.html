@@ -57,6 +57,7 @@
                     </div>
                 </div>
             </div>
+
             {% for task in project.task_set.all %}
                 <div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <div class="card">
@@ -131,6 +132,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             {% endfor %}
@@ -139,7 +141,7 @@
         </div>
 
         <div class="chat hidden-xs hidden-sm col-md-3">
-            <div id="toggle" class="toggle glyphicon glyphicon glyphicon-menu-right hidden-sm"></div>
+            <div id="toggle" class="toggle glyphicon ouricon glyphicon glyphicon-menu-right hidden-sm"></div>
             <div class="chat-room " id="chatform">
                 <div id="chat" class="messages">
                     {% for message in project.messages.all %}
