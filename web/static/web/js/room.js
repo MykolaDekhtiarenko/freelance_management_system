@@ -24,13 +24,13 @@ $(document).ready(function(event,event2){
 
 
 
-    $(".details").click(function(){
+    $('.task-grid').on('click', '.details', function(){
         var card = $(this).parent().parent();
         var modal = card.find('#myModal');
         modal.fadeIn(300);
         modal.css("display","block");
     });
-    $(".close").click(function(){
+    $('.task-grid').on('click', '.close', function(){
         modal = $(this).parent().parent();
         modal.fadeOut(200);
         modal.css("display","none");
