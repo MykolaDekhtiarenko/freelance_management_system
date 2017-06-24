@@ -5,6 +5,60 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/myprojects.less"|compile %}">
     <h2><center>Усі проекти</center></h2>
+    <div class=" button-wrapper"><button class="add_project_button glyphicon glyphicon-plus"></button></div>
+     <div id="myModal" class="modal ">
+                <div class="modal-content col-xs-12 col-md-6 col-md-offset-3 ">
+                    <span class="close">&times;</span>
+                    <div class="input-group modal-information col-xs-12">
+                        <div class="information-wrapper col-xs-12">
+                            <h2 class="project-header-create"> ПРОЕКТ </h2>
+                        <label class="add_label">Заголовок</label>
+                        <hr>
+                        <input type="text" class="form-control">
+                        <label class="add_label">Опис</label>
+                        <hr>
+                        <textarea class="form-control" rows="5"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <label class="add_label">Дата початку</label>
+                            <hr>
+                            <div class='input-group input-group-lg date' id='datetimepicker1'>
+                                <input type='text' id="datetime" required class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker1').datetimepicker({
+                                        format: 'DD.MM.YYYY'
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <label class="add_label">Дата закінчення</label>
+                            <hr>
+                            <div class='input-group input-group-lg date' id='datetimepicker2'>
+                                <input type='text' id="datetime" required class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker2').datetimepicker({
+                                        format: 'DD.MM.YYYY'
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="button-create-wrapper col-xs-12">
+                            <button type="submit" class="button button-project-create">СТВОРИТИ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <div class="grid grid-a col-xs-12 col-md-8 col-md-offset-2">
         {% for project in object_list %}
             <div class="grid-item">
@@ -22,9 +76,11 @@
                 <center>No projects yet:(</center>
             </h2>
         {% endfor %}
-    </div>
-    <div class="grid col-xs-12 col-md-8 col-md-offset-2"></div>
 
+    </div>
+    <div class="grid col-xs-12 col-md-8 col-md-offset-2">
+
+    </div>
     <script src="{% static "web/js/myprojects.js" %}"></script>
 
 

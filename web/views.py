@@ -80,6 +80,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
             else:
                 print("Current user is not one of the developers;")
                 raise Http404("")
+
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
