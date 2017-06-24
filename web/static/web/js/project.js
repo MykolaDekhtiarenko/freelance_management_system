@@ -117,7 +117,7 @@ function addTaskCard(json, dev_names) {
                                             +'<span class="modal-deadline">'+dateTimeFromISOToCard(json.deadline)+'</span>'
                                         +'</div>'
                                         +'<div class="half-width right">'
-                                            +'<select class="selectpicker">'
+                                            +'<select class="selectpicker stage-picker">'
                                                 +'<option name="W" selected>Очікування</option>'
                                                 +'<option name="P">В процесі</option>'
                                                 +'<option name="D">Зроблено</option>'
@@ -132,3 +132,41 @@ function addTaskCard(json, dev_names) {
                 +'<hr></div><hr></div>be the first</div></div></div></div></div></div>');
     $('.task-grid').append($taskInfo);
 }
+
+$('.task-grid').on('click', '.details', function(){
+        var card = $(this).parent().parent();
+        var modal = card.find('#myModal');
+        modal.fadeIn(300);
+        modal.css("display","block");
+    });
+$('.task-grid').on('click', '.close', function(){
+    modal = $(this).parent().parent();
+    modal.fadeOut(200);
+    modal.css("display","none");
+});
+$('.task-grid').on('change', '.stage-picker', function (e) {
+    e.stopImmediatePropagation();
+    var task_id = $(this).attr('task_id');
+    console.log(task_id);
+    // if(!task_id) return;
+    alert($(this).find('option:selected').attr('name'));
+    $.ajax({
+            url: "/api/task/"+task_id+'/',
+            type: "PATCH",
+            contentType: "application/json",
+            data: JSON.stringify({'stage': $(this).find('option:selected').attr('name')}),
+             beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            },
+            success: function (responce) {
+                console.log(responce);
+                console.log('Request OK');
+            },
+            error: function (xhr, errmsg, err) {
+                //TO-DO error!!
+                console.error(xhr.status + ": " + xhr.responseText);
+            }
+        });
+});

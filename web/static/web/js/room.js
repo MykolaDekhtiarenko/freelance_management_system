@@ -22,19 +22,6 @@ $(document).ready(function(event,event2){
              }
     });
 
-
-
-    $('.task-grid').on('click', '.details', function(){
-        var card = $(this).parent().parent();
-        var modal = card.find('#myModal');
-        modal.fadeIn(300);
-        modal.css("display","block");
-    });
-    $('.task-grid').on('click', '.close', function(){
-        modal = $(this).parent().parent();
-        modal.fadeOut(200);
-        modal.css("display","none");
-    });
     // window.click=function(event){
     //     if(event.target==$('#myModal')){
     //         $('#myModal').fadeOut(200);
