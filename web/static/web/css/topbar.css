@@ -97,16 +97,16 @@
 .shape-6 {
   opacity: 0.5;
 }
-h1 {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 400;
-  font-size: 46px;
-  letter-spacing: -3.5px;
-  color: #434343;
-  position: absolute;
-  top: 36%;
-  left: 28%;
-}
-h1 span {
-  color: #198f93;
-}
+/*h1 {*/
+  /*font-family: 'Oswald', sans-serif;*/
+  /*font-weight: 400;*/
+  /*font-size: 46px;*/
+  /*letter-spacing: -3.5px;*/
+  /*color: #434343;*/
+  /*position: absolute;*/
+  /*top: 36%;*/
+  /*left: 28%;*/
+/*}*/
+/*h1 span {*/
+  /*color: #198f93;*/
+/*}*/

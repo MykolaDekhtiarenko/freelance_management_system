@@ -4,25 +4,65 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/project_applying.css" %}">
     <div class="main-wrapper container col-xs-12">
-    <div class="project-information col-xs-12 col-sm-8">
-        <h2> Назва проекту </h2>
-        <text>Опис</text>
+    <div class="project-information col-xs-12 col-sm-9">
+        <div class="main-information-wrapper col-xs-12">
+        <h2 class="headers"> Назва проекту </h2>
+        <p class="headers">Опис</p>
         <hr>
-        <p>Опис лаалалалалалала</p>
-        <div class="date-wrapper col-xs-12">
+        <p>We have a fork of a Java application (http://www.github.com/dspace/dspace) on Github which we have extended with various improvements and customizations. We would like to rebuild the Github fork in order to combine new functionality from the original project. We therefore require someone with Java, Maven3 and Github experience to assist with this rebuild. We have already forked the upstream code and would now like to apply our customizations to the fork.
+
+The project requires the successful candidate to apply our custom webapp to the forked code (on 2 branches) and assist with the migration of custom functionality and configuration from our obsolete fork into the "clean" fork; functionality consists of S3 integration (which we may only need applied to a single branch) and the migration of some log4j properties files.
+
+You will also be required to document the process in our documentation system. Documentation needs only to be a bullet point list of commands and brief explanations. Documentation must be provided using Markdown syntax.
+
+Strong Github experience is a must as you will be required to fork an existing repo as well as create and maintain branches and releases/tags in an existing project. You also need to be able to deploy Java applications in your own environment; please ensure you have a clear idea of the application you will be working with before you apply for this project. Documentation for installation of DSpace is available at (link removed). You will be working with versions 5.x and 6.x so you will have to install multiple versions of the same software to your development environment.
+
+We have the project mapped out in our task management system, Trello, and you will be working closely with other technical people.
+
+This is an ongoing concern so it will lead to projects in the future.
+
+One-time Project: Install/Integrate Software
+Project Stage: Fully Specified
+Programming Languages Required: Core Java
+API Integration Required: Other
+Project Type: One-time project
+Other Skills: Apache Ant Apache Tomcat Git GitHub Java Apache Maven</p>
+            </div>
+        <div class="date-wrapper ">
             <div class="start_date col-xs-12 col-sm-6">
-                <text> Дата початку</text>
+                <p  class="headers"> Дата початку</p>
                 <hr>
-                <p> 24.04.2017</p>
+                <p class="date"> 24.04.2017</p>
             </div>
             <div class="end_date col-xs-12 col-sm-6">
-                <text> Дата закінчення</text>
+                <p class="headers"> Дата закінчення</p>
                 <hr>
-                <p>25.04.2017</p>
+                <p class="date ">25.04.2017</p>
             </div>
         </div>
     </div>
-    <div class="project-news col-xs-12 col-sm-3 col-sm-offset-1"></div>
+    <div class="project-news col-xs-12 col-sm-3 ">
+          <div class="project-news-wrapper col-sm-12">
+              <div class="col-xs-12">
+              <h2 class="headers"> Деталі </h2>
+              </div>
+
+                  <div class="project-news-information">
+                      <p> Заявок подано</p>
+                      <h1>6</h1>
+                      <hr>
+                      <p> З них підтверджено </p>
+                      <h1>2</h1>
+                      <div class="button-create-wrapper col-xs-12">
+                          <button type="submit" class="button button-apply">Податися</button>
+                      </div>
+                      <div class="button-create-wrapper col-xs-12">
+                          <button type="submit" class="button button-appliers">Переглянути</button>
+                      </div>
+
+                      </div>
+          </div>
+    </div>
     </div>
 
 
