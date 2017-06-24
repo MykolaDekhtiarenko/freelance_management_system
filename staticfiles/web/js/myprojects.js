@@ -7,6 +7,7 @@ var theOddOnes = document.getElementsByClassName('square-box');
         var random_color = colors[Math.floor(Math.random() * colors.length)];
                    theOddOnes[i].style.backgroundColor=random_color;
         }
+
 window.onload = function() {
   // toggle flag
   isMoved = !isMoved;
