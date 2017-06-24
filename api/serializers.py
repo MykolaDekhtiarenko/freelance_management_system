@@ -45,7 +45,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         )
 
 class TaskSerializer(serializers.ModelSerializer):
-    developers = UserSerializer(read_only=True, many=True)
+    developers = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
     class Meta:
         model = Task
         fields = ('description', 'deadline', 'stage', 'project', 'developers')

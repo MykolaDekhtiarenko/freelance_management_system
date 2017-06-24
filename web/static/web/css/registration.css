@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background-color: white;
+}
+#registration {
+  margin-top: 40px;
+}
+#registration > div:first-child {
+  padding-bottom: 10px;
+}
+.iconmelon {
+  display: block;
+  margin: auto;
+}
+#form > div {
+  margin-bottom: 25px;
+}
+#form > div:last-child {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.panel {
+  background-color: ffffff;
+}
+.panel-body {
+  padding-top: 30px;
+}
+.panel-title {
+  color: #0dada8;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: Roboto;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.button {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 10px 80px;
+  display: inline-block;
+  margin: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button:after {
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button-5b:hover span {
+  -webkit-transform: translateY(200%);
+  -moz-transform: translateY(200%);
+  -ms-transform: translateY(200%);
+  transform: translateY(200%);
+}
+.button-5b > .fa {
+  left: 0;
+  top: -150%;
+}
+.button-5b:hover > .fa {
+  left: 0;
+  top: -15px;
+  font-weight: 200;
+}
+.button-5 {
+  background: #0dada8;
+  color: #fff;
+  min-height: 40px;
+  min-width: 260px;
+  line-height: 24px;
+  font-size: 16px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.button-5:active {
+  background: #0dada8;
+  top: 2px;
+}
+.button-5 span {
+  display: inline-block;
+  -webkit-transition: all 0.3s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.3s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.button-5 > .fa {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  line-height: 2.5;
+  font-size: 180%;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#particles {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: -2;
+}
+.iconmelon,
+.im {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: block;
+  fill: #525151;
+}
+.iconmelon:after,
+.im:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

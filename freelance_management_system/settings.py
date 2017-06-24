@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '94^2*ann*tld*wh5bat7gd&u0m35%18wtoddm-!l!$8iim4g_^5y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/'
 
 # Application definition
@@ -80,13 +81,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'freelance_management_system.wsgi.application'
-
+# WSGI_APPLICATION = 'freelance_management_system.wsgi.application'
+# ASGI_APPLICATION
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
+    # 'default': dj_database_url.config(default="postgres:///postgresql-asymmetrical-77136", conn_max_age=500)
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'freelance_ms',
@@ -97,9 +99,8 @@ DATABASES = {
         'TEST': {
          'CHARSET': 'utf8',
          'COLLATION': 'utf8_general_ci',
+        }
     }
-    }
-
 }
 
 # Password validation
@@ -147,7 +148,6 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'static_precompiler.finders.StaticPrecompilerFinder',
 )
 

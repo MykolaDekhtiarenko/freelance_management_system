@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from djchoices import DjangoChoices, ChoiceItem
 
+from freelance_management_system import settings
+
 
 class Project(models.Model):
     class StageValues(DjangoChoices):

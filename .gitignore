@@ -14,3 +14,4 @@ lib64
 staticfilessuper_env/
 htmlcov
 staticfiles
+super_env
