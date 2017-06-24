@@ -63,6 +63,7 @@
                         <div class="information">
                             <p class="deadline"> {{ task.deadline|date:"d.m.Y" }}</p>
                             <p class="description">{{ task.description }}</p>
+                            <input type="hidden" value="{{ task.id }}">
                             <button id="details" class="details glyphicon glyphicon-menu-right"></button>
                         </div>
                         <div id="myModal" class="modal ">
@@ -89,7 +90,7 @@
                                             <span class="modal-deadline">{{ task.deadline|date:"d.m.Y" }}</span>
                                         </div>
                                         <div class="half-width right">
-                                            <select class="selectpicker">
+                                            <select task_id="{{ task.id }}" class="selectpicker stage-picker">
                                                 <option name="W" {% if task.stage == "W" %}selected{% endif %}>
                                                     Очікування
                                                 </option>
