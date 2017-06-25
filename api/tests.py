@@ -1,9 +1,12 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.test import  RequestFactory, mock
 from api.models import Project, Task
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db import models
 from datetime import datetime
+
+
 
 
 
@@ -21,9 +24,8 @@ class ProjectTest(TestCase):
         pro = self.create_project()
         self.assertTrue(isinstance(pro,Project))
         self.assertEqual(pro.__str__(),"Name: test name Description: test description ChatRoom: "+slugify("chat"))
-
-
-class TastTest(TestCase):
+"""
+class TaskTest(TestCase):
     def create_task(self,description="description",):
      u = User.objects.create(username="Nazar")
      p = ProjectTest.create_project(self)
@@ -32,3 +34,8 @@ class TastTest(TestCase):
         task = self.create_task()
         self.assertTrue(isinstance(task,Task))
         self.assertEqual(task.__str__(), ("Task: description on project: "+task.project_id+";stage: "+task.stage ))
+"""
+
+
+
+
