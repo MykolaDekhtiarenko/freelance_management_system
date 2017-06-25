@@ -52,7 +52,7 @@ class TestPortfolio(TestCase):
         request.user.is_superuser=True
 
         resp = portfolio(request)
-        self.assertRaises(self, Http404())
+        self.assertRaises(Http404)
     def test_portfolio_of_not_dev(self):
 
         user = User.objects.create()
@@ -62,7 +62,7 @@ class TestPortfolio(TestCase):
         request.user.profile.role = Profile.RoleValues.creator
         resp = portfolio(request)
 
-        self.assertRaises(self,Http404())
+        self.assertRaises(Http404)
 
     def test_home(self):
         user = User.objects.create()
@@ -96,6 +96,79 @@ class TestPortfolio(TestCase):
         view = MyProjectsListView.as_view()
         response = view(request)
         self.assertEqual(response.status_code,200)
+
+    def test_mixin_two(self):
+            factory = RequestFactory()
+            user = User.objects.create(username='joe', password='qwerty')
+            request = self.factory.get('/rand')
+
+            request.user = user
+            request.user.profile = Profile.objects.create(user=user)
+            request.user.profile.role = Profile.RoleValues.developer
+            view = MyProjectsListView.as_view()
+            response = view(request)
+            self.assertEqual(response.status_code, 200)
+
+    def test_mixin_three(self):
+                factory = RequestFactory()
+                user = User.objects.create(username='joe', password='qwerty')
+                request = self.factory.get('/rand')
+
+                request.user = user
+                request.user.is_superuser = True
+
+                view = MyProjectsListView.as_view()
+                response = view(request)
+                self.assertEqual(response.status_code, 200)
+                self.assertRaises( Http404())
+    def test_mixin_four(self):
+            factory = RequestFactory()
+            user = User.objects.create(username='joe', password='qwerty')
+            request = self.factory.get('/rand')
+
+            request.user = user
+            request.user.profile = Profile.objects.create(user=user)
+            request.user.profile.role = Profile.RoleValues.developer
+            view = MyApplicationsListView.as_view()
+            response = view(request)
+            self.assertEqual(response.status_code, 200)
+    def test_mixin_five(self):
+            factory = RequestFactory()
+            user = User.objects.create(username='joe', password='qwerty')
+            request = self.factory.get('/rand')
+
+            request.user = user
+            request.user.profile = Profile.objects.create(user=user)
+            request.user.profile.role = Profile.RoleValues.developer
+            view = MyTasksListView.as_view()
+            response = view(request)
+            self.assertEqual(response.status_code, 200)
+
+    def test_mixin_six(self):
+        factory = RequestFactory()
+        user = User.objects.create(username='joe', password='qwerty')
+        request = self.factory.get('/rand')
+
+        request.user = user
+        request.user.is_superuser=True
+        view = MyTasksListView.as_view()
+        response = view(request)
+        self.assertRaises(Http404)
+
+    def test_mixin_seven(self):
+            factory = RequestFactory()
+            user = User.objects.create(username='joe', password='qwerty')
+            request = self.factory.get('/rand')
+
+            request.user = user
+            request.user.profile = Profile.objects.create(user=user)
+            request.user.profile.role = Profile.RoleValues.developer
+            view = ProjectDetailView.as_view()
+            response = view(request)
+
+            self.assertEqual(response.status_code, 200)
+
+
 
 
 
