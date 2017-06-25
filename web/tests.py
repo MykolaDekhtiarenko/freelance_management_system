@@ -36,7 +36,7 @@ class TestSignup(unittest.TestCase):
 
 """
 class TestPortfolio(TestCase):
-
+    factory = RequestFactory()
     def test_portfolio(self):
         user = User.objects.create()
         request = HttpRequest()
@@ -63,6 +63,46 @@ class TestPortfolio(TestCase):
         resp = portfolio(request)
 
         self.assertRaises(self,Http404())
+
+    def test_home(self):
+        user = User.objects.create()
+
+        request = HttpRequest()
+        request.user = user
+        request.user.profile = Profile.objects.create(user=user)
+        request.user.profile.role = Profile.RoleValues.creator
+        resp = home(request)
+
+        self.assertEqual(resp.status_code,200 )
+
+    def test_signuap(self):
+            user = User.objects.create()
+
+            request = HttpRequest()
+            request.user = user
+            request.user.profile = Profile.objects.create(user=user)
+            request.user.profile.role = Profile.RoleValues.creator
+            resp = signup(request)
+
+            self.assertEqual(resp.status_code, 200)
+    def test_mixin(self):
+        factory = RequestFactory()
+        user = User.objects.create(username='joe', password='qwerty')
+        request = self.factory.get('/rand')
+
+        request.user = user
+        request.user.profile = Profile.objects.create(user=user)
+        request.user.profile.role = Profile.RoleValues.creator
+        view = MyProjectsListView.as_view()
+        response = view(request)
+        self.assertEqual(response.status_code,200)
+
+
+
+
+
+
+
 
 
 
