@@ -3,7 +3,7 @@
     {% load compile_static %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/room.css" %}">
-{#    <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">#}
+    {#    <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">#}
 
     <div class="room container-fluid">
         {% if project.creator == user %}
@@ -43,7 +43,8 @@
 
                             <div class="picker">
                                 <label for="selectpicker">Учасники:</label>
-                                <select id="task_team" class="selectpicker" multiple data-live-search="true" showTick="true">
+                                <select id="task_team" class="selectpicker" multiple data-live-search="true"
+                                        showTick="true">
                                     {% for user in team %}
                                         <option id="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
                                     {% empty %}
@@ -112,30 +113,36 @@
                                     </div>
                                     <div class="comments-group">
                                         <hr>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" id="comm_in_{{ task.id }}"></textarea>
                                         <div class="col-xs-12 no-margin no-padding">
-                                            <button type="submit" class="button-send">Надіслати</button>
+                                            <button type="submit" class="button-send send_comment" task_id="{{ task.id }}">Надіслати</button>
                                         </div>
                                         <p class="comments-header"> Коментарі </p>
                                         <hr>
-                                        {% for comment in task.comment_set.all %}
-                                            <div class="comment">
-                                                <p>{{ comment.timestamp }} by
-                                                    <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b>
-                                                </p>
-                                                <div class="comment-content">
-                                                    <p>{{ comment.text }}</p>
+                                        <div id="comm_box_{{ task.id }}">
+
+                                            {% for comment in task.comment_set.all %}
+                                                <div class="comment">
+                                                    <p>{{ comment.timestamp }} by
+                                                        {% if comment.user.id == user.id %}
+                                                            <b> You</b>
+                                                        {% else %}
+                                                            <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b>
+                                                        {% endif %}
+                                                    </p>
+                                                    <div class="comment-content">
+                                                        <p>{{ comment.text }}</p>
+                                                    </div>
+                                                    <hr>
                                                 </div>
-                                                <hr>
-                                            </div>
-                                        {% empty %}
-                                            be the first
-                                        {% endfor %}
+                                            {% empty %}
+                                                be the first
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             {% endfor %}

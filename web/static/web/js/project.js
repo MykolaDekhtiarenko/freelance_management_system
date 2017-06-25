@@ -38,7 +38,7 @@ $(document).ready(function () {
             },
             success: function (json) {
                 console.log('Request OK');
-                addTaskCard(task_data, dev_names);
+                addTaskCard(json, dev_names);
             },
             error: function (xhr, errmsg, err) {
                 console.error(xhr.status + ": " + xhr.responseText);
@@ -92,11 +92,12 @@ function dateTimeFromISOToCard(isoDateTime){
 function addTaskCard(json, dev_names) {
     $devsInfo = '';
     console.log(dev_names);
-    if (dev_names.length===0) $devsInfo+='<span>відсутні</span>';
+    if (dev_names.length===0) $devsInfo+='<span> відсутні</span>';
     else $(dev_names).each(function (i,e) {
         $devsInfo+='<span class="member">'+e+'</span>';
     });
-    $taskInfo = $('<div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">'
+    console.log(json);
+    var $taskInfo = $('<div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">'
                     +'<div class="card">'
                         +'<div class="information">'
                             +'<p class="deadline">'+dateFromISOToCard(json.deadline)+'</p>'
@@ -114,23 +115,24 @@ function addTaskCard(json, dev_names) {
                                     +'<div class="half-width-parent">'
                                         +'<div class="half-width">'
                                             +'<label for="modal-deadline"> Зробити до: </label>'
-                                            +'<span class="modal-deadline">'+dateTimeFromISOToCard(json.deadline)+'</span>'
+                                            +'<span class="modal-deadline"> '+dateTimeFromISOToCard(json.deadline)+'</span>'
                                         +'</div>'
                                         +'<div class="half-width right">'
-                                            +'<select class="selectpicker stage-picker">'
+                                            +'<select class="selectpicker stage-picker" task_id="'+json.id+'">'
                                                 +'<option name="W" selected>Очікування</option>'
                                                 +'<option name="P">В процесі</option>'
                                                 +'<option name="D">Зроблено</option>'
                                                 +'<option name="F">Провалено</option>'
                                             +'</select></div></div>'
                                     +'<div class="comments-group"><hr>'
-                                        +'<textarea class="form-control" rows="3"></textarea>'
+                                        +'<textarea class="form-control" rows="3" id="comm_in_'+json.id+'"></textarea>'
                                         +'<div class="col-xs-12 no-margin no-padding">'
-                                            +'<button type="submit" class="button-send">Надіслати</button>'
+                                            +'<button type="submit" class="button-send send_comment" task_id="'+json.id+'" >Надіслати</button>'
                                         +'</div>'
                                         +'<p class="comments-header"> Коментарі </p>'
-                +'<hr></div><hr></div>be the first</div></div></div></div></div></div>');
+                +'<hr><div id="comm_box_'+json.id+'">be the first</div></div></div></div></div></div></div>');
     $('.task-grid').append($taskInfo);
+    $taskInfo.find('.selectpicker').selectpicker('refresh');
 }
 
 $('.task-grid').on('click', '.details', function(){
@@ -147,9 +149,6 @@ $('.task-grid').on('click', '.close', function(){
 $('.task-grid').on('change', '.stage-picker', function (e) {
     e.stopImmediatePropagation();
     var task_id = $(this).attr('task_id');
-    console.log(task_id);
-    // if(!task_id) return;
-    alert($(this).find('option:selected').attr('name'));
     $.ajax({
             url: "/api/task/"+task_id+'/',
             type: "PATCH",
@@ -160,13 +159,51 @@ $('.task-grid').on('change', '.stage-picker', function (e) {
                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                 }
             },
-            success: function (responce) {
-                console.log(responce);
+            success: function (response) {
                 console.log('Request OK');
             },
             error: function (xhr, errmsg, err) {
                 //TO-DO error!!
                 console.error(xhr.status + ": " + xhr.responseText);
             }
-        });
+    });
 });
+$('.task-grid').on('click', '.send_comment', function (e) {
+    var task_id = $(this).attr('task_id');
+    var $commInput = $('#comm_in_'+task_id);
+    var text = $commInput.val();
+    $commInput.val('');
+    console.log($commInput);
+    console.log(text);
+    $.ajax({
+            url: "/api/comment/",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({'task': task_id, 'text': text}),
+             beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            },
+            success: function (response) {
+                console.log('Request OK');
+                addComment(response);
+            },
+            error: function (xhr, errmsg, err) {
+                //TO-DO error!!
+                console.error(xhr.status + ": " + xhr.responseText);
+            }
+    });
+});
+
+function addComment(json) {
+    var $commBox = $('#comm_box_'+json.task);
+    if($commBox.children().length===0) $commBox.text('');
+    var $newComment = $('<div class="comment">'
+        +'<p>'+json.timestamp+' by'
+        +'<b> You</b></p>'
+        +'<div class="comment-content">'
+        +'<p>'+json.text+'</p>'
+        +'</div><hr></div>');
+    $commBox.append($newComment);
+}
