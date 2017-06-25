@@ -84,5 +84,5 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
-        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk'])).count()
+        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']), status=Application.StatusValues.accepted).count()
         return context

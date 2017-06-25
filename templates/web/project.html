@@ -37,13 +37,18 @@
                         <hr>
                         <p> З них підтверджено </p>
                         <h1>{{ accepted_applications_num }}</h1>
-                        <div class="button-create-wrapper col-xs-12">
-                            <button type="submit" class="button button-apply">Податися</button>
-                        </div>
-                        <div class="button-create-wrapper col-xs-12">
-                            <button type="submit" class="button button-appliers">Переглянути</button>
-                        </div>
-
+                        {% if user == project.creator %}
+                            <div class="button-create-wrapper col-xs-12">
+                                <button type="submit" class="button button-appliers" onclick="window.location='/{# applications URL #}'">Заявки</button>
+                            </div>
+                            <div class="button-create-wrapper col-xs-12">
+                                <button type="submit" class="button button-apply" id="begin_project_btn" project_id="{{ project.id }}">Розпочати</button>
+                            </div>
+                        {% else %}
+                            <div class="button-create-wrapper col-xs-12">
+                                <button type="submit" class="button button-apply">Податися</button>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
