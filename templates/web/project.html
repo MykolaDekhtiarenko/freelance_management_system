@@ -1,205 +1,258 @@
 {% extends 'base.html' %}
 {% block content %}
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "web/css/room.css" %}">
-    {#    <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">#}
-
-    <div class="room container-fluid">
-        {% if project.creator == user %}
-            <div class="col-xs-12">
-                <div class="col-xs-12">
-                    <button id="add" class="button">ДОДАТИ</button>
+    {#    Page divided into two according to the project stage#}
+    {% if project.stage == "P" %}
+        <link rel="stylesheet" href="{% static "web/css/project_applying.css" %}">
+        <div class="main-wrapper container col-xs-12">
+            <div class="project-information col-xs-12 col-sm-9">
+                <div class="main-information-wrapper col-xs-12">
+                    <h2 class="headers"> {{ project.name }} </h2>
+                    <p class="headers">Опис</p>
+                    <hr>
+                    <p>{{ project.description }}</p>
+                </div>
+                <div class="date-wrapper ">
+                    <div class="start_date col-xs-12 col-sm-6">
+                        <p class="headers"> Дата початку</p>
+                        <hr>
+                        <p class="date"> {{ project.startDate }}</p>
+                    </div>
+                    <div class="end_date col-xs-12 col-sm-6">
+                        <p class="headers"> Дата закінчення</p>
+                        <hr>
+                        <p class="date ">{{ project.endDate }}</p>
+                    </div>
                 </div>
             </div>
-        {% endif %}
+            <div class="project-news col-xs-12 col-sm-3 ">
+                <div class="project-news-wrapper col-sm-12">
+                    <div class="col-xs-12">
+                        <h2 class="headers"> Деталі </h2>
+                    </div>
 
-        <div class="task-grid col-xs-12 col-sm-9">
+                    <div class="project-news-information">
+                        <p> Заявок подано</p>
+                        <h1>{{ project.applications.count }}</h1>
+                        <hr>
+                        <p> З них підтверджено </p>
+                        <h1>{{ accepted_applications_num }}</h1>
+                        <div class="button-create-wrapper col-xs-12">
+                            <button type="submit" class="button button-apply">Податися</button>
+                        </div>
+                        <div class="button-create-wrapper col-xs-12">
+                            <button type="submit" class="button button-appliers">Переглянути</button>
+                        </div>
 
-            <div id="addTask" class="task">
-                <div class="task-content">
-                    <div class="close">&times;</div>
-                    <div class="content">
-                        <div class="form-group">
-                            <h2 class="add-task-header"> Додати завдання</h2>
-                            <label for="usr">Опис:</label>
-                            <textarea class="form-control" rows="5" id="task_descr"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static "web/js/project_applying.js" %}"></script>
+    {% else %}
+        <link rel="stylesheet" href="{% static "web/css/room.css" %}">
+        {#    <link rel="stylesheet" href="{% static "web/css/config.less"|compile %}">#}
 
-                            <label> Дедлайн: </label>
+        <div class="room container-fluid">
+            {% if project.creator == user %}
+                <div class="col-xs-12">
+                    <div class="col-xs-12">
+                        <button id="add" class="button">ДОДАТИ</button>
+                    </div>
+                </div>
+            {% endif %}
 
-                            <div class='input-group input-group-lg date' id='datetimepicker1'>
-                                <input type='text' id="tsk_deadline" required class="form-control"/>
-                                <span class="input-group-addon">
+            <div class="task-grid col-xs-12 col-sm-9">
+
+                <div id="addTask" class="task">
+                    <div class="task-content">
+                        <div class="close">&times;</div>
+                        <div class="content">
+                            <div class="form-group">
+                                <h2 class="add-task-header"> Додати завдання</h2>
+                                <label for="usr">Опис:</label>
+                                <textarea class="form-control" rows="5" id="task_descr"></textarea>
+
+                                <label> Дедлайн: </label>
+
+                                <div class='input-group input-group-lg date' id='datetimepicker1'>
+                                    <input type='text' id="tsk_deadline" required class="form-control"/>
+                                    <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker1').datetimepicker({
-                                        format: 'YYYY-MM-DD hh:mm'
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker1').datetimepicker({
+                                            format: 'YYYY-MM-DD hh:mm'
+                                        });
                                     });
-                                });
-                            </script>
+                                </script>
 
-                            <div class="picker">
-                                <label for="selectpicker">Учасники:</label>
-                                <select id="task_team" class="selectpicker" multiple data-live-search="true"
-                                        showTick="true">
-                                    {% for user in team %}
-                                        <option id="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                                    {% empty %}
-                                        <option disabled> No team for this project yet</option>
-                                    {% endfor %}
+                                <div class="picker">
+                                    <label for="selectpicker">Учасники:</label>
+                                    <select id="task_team" class="selectpicker" multiple data-live-search="true"
+                                            showTick="true">
+                                        {% for user in team %}
+                                            <option id="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                                        {% empty %}
+                                            <option disabled> No team for this project yet</option>
+                                        {% endfor %}
 
-                                </select>
+                                    </select>
+                                </div>
+                                <input id="project_id_hidden" type="hidden" value="{{ project.id }}">
+                                {% csrf_token %}
                             </div>
-                            <input id="project_id_hidden" type="hidden" value="{{ project.id }}">
-                            {% csrf_token %}
+                            <div class="errornote text-center" id="add_task_error"></div>
+                            <button type="submit" class="button button-task-create" id="add_task_btn">СТВОРИТИ</button>
                         </div>
-                        <div class="errornote text-center" id="add_task_error"></div>
-                        <button type="submit" class="button button-task-create" id="add_task_btn">СТВОРИТИ</button>
                     </div>
                 </div>
-            </div>
 
-            {% for task in project.task_set.all %}
-                <div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="information">
-                            <p class="deadline"> {{ task.deadline|date:"d.m.Y" }}</p>
-                            <p class="description">{{ task.description }}</p>
-                            <input type="hidden" value="{{ task.id }}">
-                            <button id="details" class="details glyphicon glyphicon-menu-right"></button>
-                        </div>
-                        <div id="myModal" class="modal ">
-                            <div class="modal-content ">
-                                <span id="close" class="close">&times;</span>
-                                <div class="input-group modal-information col-xs-12">
+                {% for task in project.task_set.all %}
+                    <div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="information">
+                                <p class="deadline"> {{ task.deadline|date:"d.m.Y" }}</p>
+                                <p class="description">{{ task.description }}</p>
+                                <input type="hidden" value="{{ task.id }}">
+                                <button id="details" class="details glyphicon glyphicon-menu-right"></button>
+                            </div>
+                            <div id="myModal" class="modal ">
+                                <div class="modal-content ">
+                                    <span id="close" class="close">&times;</span>
+                                    <div class="input-group modal-information col-xs-12">
 
-                                    <div class="group">
-                                        <label for="group"> Учасники: </label>
-                                        {% for developer in task.developers.all %}
-                                            <span class="member"> {{ developer.first_name }} {{ developer.last_name }} </span>
-                                        {% empty %}
-                                            <span>відсутні</span>
-                                        {% endfor %}
-                                    </div>
-
-                                    <div class="modal-description col-xs-12">
-                                        {{ task.description }}
-                                    </div>
-
-                                    <div class="half-width-parent">
-                                        <div class="half-width">
-                                            <label for="modal-deadline"> Зробити до: </label>
-                                            <span class="modal-deadline">{{ task.deadline|date:"d.m.Y" }}</span>
-                                        </div>
-                                        <div class="half-width right">
-                                            <select task_id="{{ task.id }}" class="selectpicker stage-picker">
-                                                <option name="W" {% if task.stage == "W" %}selected{% endif %}>
-                                                    Очікування
-                                                </option>
-                                                <option name="P" {% if task.stage == "P" %}selected{% endif %}>В
-                                                    процесі
-                                                </option>
-                                                <option name="D" {% if task.stage == "D" %}selected{% endif %}>
-                                                    Зроблено
-                                                </option>
-                                                <option name="F" {% if task.stage == "F" %}selected{% endif %}>
-                                                    Провалено
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="comments-group">
-                                        <hr>
-                                        <textarea class="form-control" rows="3" id="comm_in_{{ task.id }}"></textarea>
-                                        <div class="col-xs-12 no-margin no-padding">
-                                            <button type="submit" class="button-send send_comment" task_id="{{ task.id }}">Надіслати</button>
-                                        </div>
-                                        <p class="comments-header"> Коментарі </p>
-                                        <hr>
-                                        <div id="comm_box_{{ task.id }}">
-
-                                            {% for comment in task.comment_set.all %}
-                                                <div class="comment">
-                                                    <p>{{ comment.timestamp }} by
-                                                        {% if comment.user.id == user.id %}
-                                                            <b> You</b>
-                                                        {% else %}
-                                                            <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b>
-                                                        {% endif %}
-                                                    </p>
-                                                    <div class="comment-content">
-                                                        <p>{{ comment.text }}</p>
-                                                    </div>
-                                                    <hr>
-                                                </div>
+                                        <div class="group">
+                                            <label for="group"> Учасники: </label>
+                                            {% for developer in task.developers.all %}
+                                                <span class="member"> {{ developer.first_name }} {{ developer.last_name }} </span>
                                             {% empty %}
-                                                be the first
+                                                <span>відсутні</span>
                                             {% endfor %}
                                         </div>
+
+                                        <div class="modal-description col-xs-12">
+                                            {{ task.description }}
+                                        </div>
+
+                                        <div class="half-width-parent">
+                                            <div class="half-width">
+                                                <label for="modal-deadline"> Зробити до: </label>
+                                                <span class="modal-deadline">{{ task.deadline|date:"d.m.Y" }}</span>
+                                            </div>
+                                            <div class="half-width right">
+                                                <select task_id="{{ task.id }}" class="selectpicker stage-picker">
+                                                    <option name="W" {% if task.stage == "W" %}selected{% endif %}>
+                                                        Очікування
+                                                    </option>
+                                                    <option name="P" {% if task.stage == "P" %}selected{% endif %}>В
+                                                        процесі
+                                                    </option>
+                                                    <option name="D" {% if task.stage == "D" %}selected{% endif %}>
+                                                        Зроблено
+                                                    </option>
+                                                    <option name="F" {% if task.stage == "F" %}selected{% endif %}>
+                                                        Провалено
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="comments-group">
+                                            <hr>
+                                            <textarea class="form-control" rows="3"
+                                                      id="comm_in_{{ task.id }}"></textarea>
+                                            <div class="col-xs-12 no-margin no-padding">
+                                                <button type="submit" class="button-send send_comment"
+                                                        task_id="{{ task.id }}">Надіслати
+                                                </button>
+                                            </div>
+                                            <p class="comments-header"> Коментарі </p>
+                                            <hr>
+                                            <div id="comm_box_{{ task.id }}">
+
+                                                {% for comment in task.comment_set.all %}
+                                                    <div class="comment">
+                                                        <p>{{ comment.timestamp }} by
+                                                            {% if comment.user.id == user.id %}
+                                                                <b> You</b>
+                                                            {% else %}
+                                                                <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b>
+                                                            {% endif %}
+                                                        </p>
+                                                        <div class="comment-content">
+                                                            <p>{{ comment.text }}</p>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                {% empty %}
+                                                    be the first
+                                                {% endfor %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-
-
-        </div>
-
-        <div class="chat hidden-xs hidden-sm col-md-3">
-            <div id="toggle" class="toggle glyphicon ouricon glyphicon glyphicon-menu-right hidden-sm"></div>
-            <div class="chat-room " id="chatform">
-                <div id="chat" class="messages">
-                    {% for message in project.messages.all %}
-                        {% if message.user.username == user.username %}
-                            <div class="username my-username">You:</div>
-                            <div class="message-container">
-                                <div class="message my-message">
-                                    <div class="message-text">{{ message.message }}</div>
-                                    <div class="timestamp">{{ message.formatted_timestamp }}</div>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="username">{{ message.user.first_name }} {{ message.user.last_name }}:</div>
-                            <div class="message-container">
-                                <div class="message">
-                                    <div class="message-text">{{ message.message }}</div>
-                                    <div class="timestamp">{{ message.formatted_timestamp }}</div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div id="send">
-                    <div class="input-message-wrapper">
-                        <div class="input-wrapper">
-                            <div class="input-message">
-                                <div class="input-group">
-                                    <input id="message" type="text" class="form-control" placeholder="Повідомлення">
-                                    <span class="input-group-btn">
-                                        <button id="send-message" class="btn btn-default" type="button">Сказати</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
 
             </div>
 
-        </div>
-    </div>
-    <script>
-        var USERNAME = '{{ user.username }}'
-        var CHATROOM = '{{ project.chatRoom }}'
-    </script>
+            <div class="chat hidden-xs hidden-sm col-md-3">
+                <div id="toggle" class="toggle glyphicon ouricon glyphicon glyphicon-menu-right hidden-sm"></div>
+                <div class="chat-room " id="chatform">
+                    <div id="chat" class="messages">
+                        {% for message in project.messages.all %}
+                            {% if message.user.username == user.username %}
+                                <div class="username my-username">You:</div>
+                                <div class="message-container">
+                                    <div class="message my-message">
+                                        <div class="message-text">{{ message.message }}</div>
+                                        <div class="timestamp">{{ message.formatted_timestamp }}</div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="username">{{ message.user.first_name }} {{ message.user.last_name }}:</div>
+                                <div class="message-container">
+                                    <div class="message">
+                                        <div class="message-text">{{ message.message }}</div>
+                                        <div class="timestamp">{{ message.formatted_timestamp }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="send">
+                        <div class="input-message-wrapper">
+                            <div class="input-wrapper">
+                                <div class="input-message">
+                                    <div class="input-group">
+                                        <input id="message" type="text" class="form-control" placeholder="Повідомлення">
+                                        <span class="input-group-btn">
+                                        <button id="send-message" class="btn btn-default" type="button">Сказати</button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <script src="{% static "web/js/room.js" %}"></script>
-    <script type="text/javascript" src='{% static "chat/reconnecting-websocket.min.js" %}'></script>
-    <script type="text/javascript" src='{% static "chat/chat.js" %}'></script>
-    <script type="text/javascript" src="{% static "web/js/project.js" %}"></script>
+
+                </div>
+
+            </div>
+        </div>
+        <script>
+            var USERNAME = '{{ user.username }}'
+            var CHATROOM = '{{ project.chatRoom }}'
+        </script>
+
+        <script src="{% static "web/js/room.js" %}"></script>
+        <script type="text/javascript" src='{% static "chat/reconnecting-websocket.min.js" %}'></script>
+        <script type="text/javascript" src='{% static "chat/chat.js" %}'></script>
+        <script type="text/javascript" src="{% static "web/js/project.js" %}"></script>
+    {% endif %}
 {% endblock %}
