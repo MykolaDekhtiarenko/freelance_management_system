@@ -1,7 +1,6 @@
 import datetime
 
 from django.contrib.auth.models import Group
-from httplib2 import Response
 
 from api.models import *
 from rest_framework import serializers
