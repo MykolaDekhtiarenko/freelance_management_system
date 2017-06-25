@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% load compile_static %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/myprojects.css" %}">
     <script src="{% static "web/js/project_list_page.js"%}"></script>
