@@ -1,4 +1,7 @@
+import datetime
+
 from django.contrib.auth.models import Group
+from httplib2 import Response
 
 from api.models import *
 from rest_framework import serializers
@@ -48,7 +51,7 @@ class TaskSerializer(serializers.ModelSerializer):
     developers = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
     class Meta:
         model = Task
-        fields = ('description', 'deadline', 'stage', 'project', 'developers')
+        fields = ('id', 'description', 'deadline', 'stage', 'project', 'developers')
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
