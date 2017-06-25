@@ -142,7 +142,6 @@
   position: fixed;
   top: 85%;
   right: 20px;
-  z-index: 100;
 }
 .add_project_button {
   width: 70px;
@@ -173,7 +172,7 @@
   /* Stay in place */
   z-index: 1;
   /* Sit on top */
-  padding-top: 60px;
+  padding-top: 50px;
   /* Location of the box */
   width: 100%;
   /* Full width */
@@ -237,8 +236,4 @@ hr {
   background: white;
   color: #0dada8;
   border: 2px solid #0dada8;
-}
-
-.new-project-box-bacground{
-  background-color: #72a3a1;
 }

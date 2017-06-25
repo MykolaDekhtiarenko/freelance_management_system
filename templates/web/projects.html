@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% load compile_static %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/myprojects.css" %}">
+    <script src="{% static "web/js/project_list_page.js"%}"></script>
     <h2><center>Усі проекти</center></h2>
     <div class=" button-wrapper"><button class="add_project_button glyphicon glyphicon-plus"></button></div>
      <div id="myModal" class="modal ">
@@ -14,16 +14,16 @@
                             <h2 class="project-header-create"> ПРОЕКТ </h2>
                         <label class="add_label">Заголовок</label>
                         <hr>
-                        <input type="text" class="form-control">
+                        <input id="project-title" type="text" class="form-control">
                         <label class="add_label">Опис</label>
                         <hr>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea id="project-description" class="form-control" rows="5"></textarea>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <label class="add_label">Дата початку</label>
                             <hr>
                             <div class='input-group input-group-lg date' id='datetimepicker1'>
-                                <input type='text' id="datetime" required class="form-control"/>
+                                <input type='text' id="date1" required class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -31,16 +31,17 @@
                             <script type="text/javascript">
                                 $(function () {
                                     $('#datetimepicker1').datetimepicker({
-                                        format: 'DD.MM.YYYY'
+                                        format: 'YYYY-MM-DD'
                                     });
                                 });
                             </script>
                         </div>
+                        {% csrf_token %}
                         <div class="col-xs-12 col-sm-6">
                             <label class="add_label">Дата закінчення</label>
                             <hr>
                             <div class='input-group input-group-lg date' id='datetimepicker2'>
-                                <input type='text' id="datetime" required class="form-control"/>
+                                <input type='text' id="date2" required class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -48,18 +49,19 @@
                             <script type="text/javascript">
                                 $(function () {
                                     $('#datetimepicker2').datetimepicker({
-                                        format: 'DD.MM.YYYY'
+                                        format: 'YYYY-MM-DD'
                                     });
                                 });
                             </script>
                         </div>
+                        <div id="error-message" class="col-xs-12 col-sm-6"></div>
                         <div class="button-create-wrapper col-xs-12">
-                            <button type="submit" class="button button-project-create">СТВОРИТИ</button>
+                            <button id="add-project" type="submit" class="button button-project-create">СТВОРИТИ</button>
                         </div>
                     </div>
                 </div>
-            </div>
-    <div class="grid grid-a col-xs-12 col-md-8 col-md-offset-2">
+     </div>
+    <div id="project-list" class="grid grid-a col-xs-12 col-md-8 col-md-offset-2">
         {% for project in object_list %}
             <div class="grid-item">
                 <div class="square-box pull-right">

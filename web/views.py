@@ -63,6 +63,7 @@ class MyTasksListView(LoginRequiredMixin, ListView):
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     template_name = "web/applications.html"
+
     queryset = Project.objects.all()
     def get_object(self):
         obj = super(ProjectDetailView, self).get_object()
@@ -84,4 +85,5 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
+        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']), status=Application.StatusValues.accepted).count()
         return context

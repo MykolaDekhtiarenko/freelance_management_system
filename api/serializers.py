@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import Group
 
 from api.models import *
@@ -32,7 +34,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'name', 'description', 'stage',
-                  'chatRoom', 'creator')
+                  'chatRoom', 'creator', 'endDate', 'startDate')
         extra_kwargs = {
             'chatRoom': {
                 'read_only': True
@@ -48,7 +50,7 @@ class TaskSerializer(serializers.ModelSerializer):
     developers = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
     class Meta:
         model = Task
-        fields = ('description', 'deadline', 'stage', 'project', 'developers')
+        fields = ('id', 'description', 'deadline', 'stage', 'project', 'developers')
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

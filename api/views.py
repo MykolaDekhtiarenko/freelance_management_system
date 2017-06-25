@@ -19,9 +19,6 @@ class ProjectModelViewSet(viewsets.ModelViewSet):
 class TaskModelViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    def partial_update(self, request, *args, **kwargs):
-        print(kwargs)
-        return super(TaskModelViewSet, self).partial_update(request, args, kwargs)
 
 class CommentModelViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
