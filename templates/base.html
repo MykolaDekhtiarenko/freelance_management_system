@@ -109,7 +109,9 @@
                                 class="profile-picture img-circle" style="max-height:40px;"> {{ user.username }} <span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Профіль</a></li>
+                            {% if user.profile.role == 'D' %}
+                                <li><a href="/portfolio/{{ user.id }}/">Портфоліо</a></li>
+                            {% endif %}
                             <li><a href="#">Налаштування</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout">Вийти</a></li>

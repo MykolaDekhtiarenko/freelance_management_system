@@ -38,6 +38,8 @@ class Application(models.Model):
 
 class Skill(models.Model):
     label = models.CharField(max_length=20)
+    def __str__(self):
+        return "Skill %s (id=%s)" % (self.label, self.id)
 
 class Portfolio(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -52,7 +54,7 @@ class Profile(models.Model):
         creator = ChoiceItem("C")
         developer = ChoiceItem("D")
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=RoleValues.choices)
 
 class Task(models.Model):

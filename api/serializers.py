@@ -10,7 +10,7 @@ from django.template.defaultfilters import slugify
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = '__all__'
+        fields = ('id', 'label')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,15 +18,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(read_only=True, many=True)
+    skills = serializers.PrimaryKeyRelatedField(queryset=Skill.objects.all(), many=True)
     class Meta:
         model = Portfolio
-        fields = ('about', 'education', 'experience', 'phone', 'skills')
+        fields = ('user', 'about', 'education', 'experience', 'phone', 'skills')
+        extra_kwargs = {'user': {'required': False}}
 
     def create(self, validated_data):
-        return Portfolio.objects.create(
-            user = self.context['request'].user, **validated_data
-        )
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return super(PortfolioSerializer, self).create(validated_data)
 
 # this should work (but i'm not sure)
 class ProjectSerializer(serializers.ModelSerializer):

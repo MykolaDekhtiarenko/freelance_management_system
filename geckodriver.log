@@ -1,0 +1,42 @@
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'
+Ignoring bcrypt-3.1.11 because its extensions are not built.  Try: gem pristine bcrypt --version 3.1.11
+Ignoring byebug-9.0.6 because its extensions are not built.  Try: gem pristine byebug --version 9.0.6
+Ignoring debug_inspector-0.0.2 because its extensions are not built.  Try: gem pristine debug_inspector --version 0.0.2
+/home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:270:in `find_spec_for_exe': can't find gem webdrivers (>= 0.a) (Gem::GemNotFoundException)
+	from /home/nazar/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/rubygems.rb:298:in `activate_bin_path'
+	from /home/nazar/.rbenv/versions/2.3.1/bin/geckodriver:22:in `<main>'

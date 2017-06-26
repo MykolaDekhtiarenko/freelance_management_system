@@ -1,0 +1,22 @@
+.headers{
+   color:#0dada8;
+    text-align:center;
+}
+.tips{
+    color:grey;
+    font-size:12px;
+    text-align:center;
+}
+.count{
+    text-align:center;
+}
+.number{
+    color: #01aaad;
+}
+.skill{
+    padding:5px 10px;
+    color:white;
+    border-radius:2px;
+    margin-bottom:10px;
+    display:inline-block;
+}
