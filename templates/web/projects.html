@@ -68,7 +68,7 @@
                 </div>
      </div>
     <div id="project-list" class="grid grid-a col-xs-12 col-md-8 col-md-offset-2">
-        {% for project in object_list %}
+        {% for project in object_list.all %}
             <div class="grid-item">
                 <div class="square-box pull-right">
                     <a href="/project/{{ project.id }}" type="submit" class=" button button-5 button-5b icon-cart"><i

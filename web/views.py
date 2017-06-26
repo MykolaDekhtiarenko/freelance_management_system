@@ -28,9 +28,9 @@ def applicaions(request, pk):
 def portfolio(request, pk):
     allSkills = Skill.objects.all()
     projectsDone = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
-                                          stage=Project.StageValues.finished).count()
+                                          stage=Project.StageValues.finished).distinct().count()
     projectsAccepted = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
-                                          stage__in=[Project.StageValues.preparation, Project.StageValues.development]).count()
+                                          stage__in=[Project.StageValues.preparation, Project.StageValues.development]).distinct().count()
     applicationsAll = Application.objects.filter(user_id=pk).count()
     try:
         return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user_id=pk), 'all_skills': allSkills,
@@ -56,7 +56,7 @@ class MyProjectsListView(LoginRequiredMixin, ListView):
             if self.request.user.profile.role == Profile.RoleValues.creator:
                 return Project.objects.filter(creator=self.request.user)
             elif self.request.user.profile.role == Profile.RoleValues.developer:
-                return Project.objects.filter(applications__user=self.request.user).filter(applications__status__exact=Application.StatusValues.accepted)
+                return Project.objects.filter(applications__status__exact=Application.StatusValues.accepted).distinct()
         else:
             raise Http404("No projects are available for superuser")
 
@@ -89,7 +89,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
             return obj
         elif obj.stage == Project.StageValues.development:
             # print("Development case;")
-            if self.request.user in User.objects.filter(application__project=obj).filter(application__status__exact=Application.StatusValues.accepted):
+            if self.request.user in User.objects.filter(application__project=obj).filter(application__status__exact=Application.StatusValues.accepted).distinct():
                 # print("Current user is one of the developers;")
                 return obj
             else:
@@ -98,7 +98,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
-        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']), status=Application.StatusValues.accepted).count()
+        context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted).distinct()
+        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']).distinct(), status=Application.StatusValues.accepted).count()
         context['applicants'] = User.objects.filter(application__project=Project.objects.get(id=self.kwargs['pk']))
         return context

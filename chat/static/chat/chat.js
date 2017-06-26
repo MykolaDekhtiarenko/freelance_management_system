@@ -17,7 +17,7 @@ $('#chatform').on('submit', function(event) {
 chat_socket.onmessage = function(message) {
     var data = JSON.parse(message.data);
     $('#chat').append(
-        '<div class="username'+ ((data.user===USERNAME)?' my-username':'')+'">You:</div>'+
+        '<div class="username'+ ((data.user===USERNAME)?' my-username':'')+'">'+((data.user===USERNAME)?'You: ':data.user.first_name+" "+data.user.last_name+": ")+'</div>'+
         '<div class="message-container">'+
         '<div class="message'+((data.user===USERNAME)?' my-message':'')+'">'+
         '<div class="message-text">'+ data.message + '</div>'+

@@ -95,15 +95,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-
+                <li><a href="/">Усі проекти</a></li>
                 {% if user.is_authenticated %}
                     {% if "myprojects" not in request.get_full_path%}
                         {% if user.profile.role == 'D' or user.profile.role == 'C' %}
                             <li><a href="/myprojects">Мої проекти</a></li>
-                        {% endif %}
-                    {% else %}
-                        {% if user.profile.role == 'D' or user.profile.role == 'C' %}
-                            <li><a href="/">Усі проекти</a></li>
                         {% endif %}
                     {% endif %}
                     <li class="dropdown">

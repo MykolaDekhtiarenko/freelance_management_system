@@ -45,14 +45,16 @@
                                 <button type="submit" class="button button-apply" id="begin_project_btn" project_id="{{ project.id }}">Розпочати</button>
                             </div>
                         {% else %}
-                            <div class="button-create-wrapper col-xs-12">
-                                {% if user not in applicants %}
-                                    <button id="apply_for_project" type="submit" class="button button-apply" project_id="{{ project.id }}">Податися</button>
-                                {% else %}
-                                    Ви вже подали заявку на даний проект.
-                                {% endif %}
+                            {% if user.profile.role == 'D' %}
+                                <div class="button-create-wrapper col-xs-12">
+                                    {% if user not in applicants %}
+                                        <button id="apply_for_project" type="submit" class="button button-apply" project_id="{{ project.id }}">Податися</button>
+                                    {% else %}
+                                        Ви вже подали заявку на даний проект.
+                                    {% endif %}
 
-                            </div>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
