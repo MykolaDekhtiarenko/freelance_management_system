@@ -17,10 +17,10 @@ def signup(request):
 def applicaions(request, pk):
     project = Project.objects.get(pk=pk)
     if request.user == project.creator:
-        if project.stage==Project.StageValues.preparation:
+        if project.stage!=Project.StageValues.finished:
             return render_to_response("web/applications.html", {"applications": Application.objects.filter(project=project), "project": project})
         else:
-            raise Http404("Now this page is unawailabe, because project stage is", project.stage)
+            raise Http404("Now this page is unawailabe because project was closed ")
     else:
         raise Http404
 

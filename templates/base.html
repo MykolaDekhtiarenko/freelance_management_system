@@ -89,19 +89,23 @@
                             z M232.773,110.353c82.748,0,149.829,67.079,149.829,149.83c-0.001,82.749-67.081,149.831-149.829,149.831
                             c-82.752,0-149.829-67.082-149.829-149.831C82.944,177.432,150.021,110.353,232.773,110.353z"/>
                         </svg>
-                    <span id="navbar-brand-name"><span id="navbar-brand-dev">Dev</span>Idea</span>
+                    <span onclick="window.location='/'" id="navbar-brand-name"><span id="navbar-brand-dev">Dev</span>Idea</span>
                 </div>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {% if user.profile.role == 'D' or user.profile.role == 'C' %}
-                    <li><a href="/myprojects">Мої проекти</a></li>
-                {% endif %}
-                {% if user.profile.role == 'D' %}
-                    <li><a href="/">Мої заявки</a></li>
-                {% endif %}
+
                 {% if user.is_authenticated %}
+                    {% if "myprojects" not in request.get_full_path%}
+                        {% if user.profile.role == 'D' or user.profile.role == 'C' %}
+                            <li><a href="/myprojects">Мої проекти</a></li>
+                        {% endif %}
+                    {% else %}
+                        {% if user.profile.role == 'D' or user.profile.role == 'C' %}
+                            <li><a href="/">Усі проекти</a></li>
+                        {% endif %}
+                    {% endif %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><img
@@ -112,7 +116,6 @@
                             {% if user.profile.role == 'D' %}
                                 <li><a href="/portfolio/{{ user.id }}/">Портфоліо</a></li>
                             {% endif %}
-                            <li><a href="#">Налаштування</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout">Вийти</a></li>
                         </ul>

@@ -25,7 +25,6 @@ chat_socket.onmessage = function(message) {
         '</div>'+
         '</div>'
     );
-    alert( $('#chat').height())
     $("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight}, 500);
 };
 
