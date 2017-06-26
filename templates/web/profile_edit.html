@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "web/css/profile_edit.css" %}">
+    <div class="container col-xs-12">
+        <div class=" information col-xs-12">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h1 class="headers">Anna Polyakova</h1>
+                <p> Будь ласка, заповніть ваш профіль - це слугуватиме за портфоліо для майбутніх замовників</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <label class="add_label">Освіта</label>
+                <p class="tips">Додайте заклади в яких ви навчалися, зокрема середні та вищі навчальні заклади, курси, тощо </p>
+                <hr>
+                <textarea id="project-description" class="form-control" rows="5"></textarea>
+                <label class="add_label">Досвід роботи</label>
+                <p class="tips">Додайте перелік місць, де ви працювали, не забудьте вказати час роботи, назву компанії та займану посаду</p>
+                <hr>
+                <textarea id="project-description" class="form-control" rows="5"></textarea>
+                <label class="add_label">Короткий Cover Letter</label>
+                <p class="tips">В даний пункт додайте короткий опис про себе, ваші основні переваги та недоліки</p>
+                <hr>
+                <textarea id="project-description" class="form-control" rows="5"></textarea>
+                <label class="add_label">Номер телефону</label>
+                <hr>
+                <input id="phone_number" type="text" class="form-control">
+                <div class="picker">
+                    <label for="selectpicker" class="add_label">Вміння</label>
+                    <p class="tips"> Додайте якомога більше вмінь для того аби замовник міг зрозуміти, що ви підходите для проекту</p>
+                    <hr>
+                    <select id="task_team" class="selectpicker" multiple data-live-search="true"
+                                            showTick="true">
+                    </select>
+                </div>
+                <div class="button-wrapper">
+                     <button type="submit" class="button button-agree">Зберегти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script type="text/javascript" src="{% static "web/js/profile_edit.js" %}"></script>
+{% endblock %}

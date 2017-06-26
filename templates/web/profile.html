@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load compile_static %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "web/css/profile.css" %}">
+  <script type="text/javascript" src="{% static "web/js/profile.js" %}"></script>
+{% endblock %}
