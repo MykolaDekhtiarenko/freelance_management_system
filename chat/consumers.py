@@ -21,8 +21,8 @@ def ws_receive(message):
     chatRoom = message.channel_session['room']
     project = Project.objects.get(chatRoom=chatRoom)
     data = json.loads(message['text'])
-    print("Current user: ", message.user)
-    m = project.messages.create(user=message.user, message=data['message'])
+    print("Current user: ", message.user.first_name)
+    m = project.messages.create(user=message.user, first_name=message.user.first_name, last_name=message.user.last_name, message=data['message'])
     Group('chat-' + chatRoom).send({'text': json.dumps(m.as_dict())})
 
 
