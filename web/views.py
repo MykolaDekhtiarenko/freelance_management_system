@@ -62,7 +62,7 @@ class MyTasksListView(LoginRequiredMixin, ListView):
             raise Http404("No tasks are available for superuser")
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
-    template_name = "web/profile_edit.html"
+    template_name = "web/project.html"
 
     queryset = Project.objects.all()
     def get_object(self):

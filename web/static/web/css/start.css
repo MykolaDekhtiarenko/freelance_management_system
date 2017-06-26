@@ -1,0 +1,119 @@
+.logo{
+  border-radius:50%;
+}
+#logo-wrapper {
+  margin-top:30px;
+  color: #999;
+}
+.sign-wrapper{
+  margin-top:100px;
+}
+.p {
+  font: normal 40px/50px Arial, sans-serif;
+  height: 50px;
+  float: left;
+  margin-right: 0.3em;
+}
+.b {
+  font: normal 40px/50px Arial, sans-serif;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+}
+.span1 {
+  font: normal 40px/50px Arial, sans-serif;
+  display: inline-block;
+  color: #0dada8;
+  position: relative;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+  -webkit-animation: move 5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 1s;
+}
+.buttons-wrapper{
+  margin-top:30px;
+}
+.button{
+  color:#0dada8;
+  border: 3px solid #0dada8;
+  background-color:white;
+  text-transform: uppercase;
+  padding:10px 30px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button:hover{
+  color:white;
+  background-color:#0dada8;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.button2{
+    font-size:20px;
+
+}
+@keyframes move {
+0%  { top: 0px; }
+20% { top: -50px; }
+40% { top: -100px; }
+60% { top: -150px; }
+80% { top: -200px; }
+}
+
+.who-are-we{
+  background:url("http://www.digitalplatforms.co.za/wp-content/uploads/2014/09/laptop-on-work-desk.jpg") no-repeat;
+  height:70%;
+  width:100%;
+}
+
+.how-it-works{
+  margin-top:70px;
+  margin-bottom:70px;
+}
+.image1{
+  margin-bottom:30px;
+  height:100px;
+  background: url(//www.upwork.com/static/marketing/adquiro-webpack/images/find-cl.28496fca3df3.svg) 50% no-repeat;
+}
+.image2{
+    margin-bottom:30px;
+
+  height:100px;
+  background: url(//www.upwork.com/static/marketing/adquiro-webpack/images/hire-cl.febca6130d07.svg) 50% no-repeat;}
+.image3{
+    margin-bottom:30px;
+  height:100px;
+  background: url(//www.upwork.com/static/marketing/adquiro-webpack/images/work-cl.e7af5cc1a9b7.svg) 50% no-repeat;}
+.image4{
+  margin-bottom:30px;
+  height:100px;
+  background: url(//www.upwork.com/static/marketing/adquiro-webpack/images/pay-cl.ad4aee2d07ec.svg) 50% no-repeat;
+}
+
+.headers{
+  margin-top:50px;
+  text-align:center;
+  color:#0dada8;
+}
+.description{
+  margin-top:30px;
+  text-align:center;
+}
+.skills{
+  padding-top:60px;
+  margin-bottom:100px;
+}
+
+.connect {
+  margin-bottom: 100px;
+  text-align: center;
+}
+.connect p{
+  margin-top:30px;
+  margin-bottom:30px;
+}

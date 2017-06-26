@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "web/css/start.css" %}">
+
+<div id='logo-wrapper' class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="col-xs-12 col-md-3">
+      <svg version="1.1" class="logo" id="layer-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="300px" height="300px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="50%" stop-color="#04b6d6"/>
+                                    <stop offset="100%" stop-color="#04b6d6" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="50%" stop-color="#a0d5d6"/>
+                                    <stop offset="100%" stop-color="#a0d5d6" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="grad3" x1="100%" y1="100%" x2="0%" y2="0%">
+                                    <stop offset="50%" stop-color="#1c9ea0"/>
+                                    <stop offset="100%" stop-color="#1c9ea0" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                        <path class="shape-1" fill="url(#grad1)" d="M237.773,56.673c-98.48,0-178.314,79.834-178.314,178.315c0,98.48,79.834,178.314,178.314,178.314
+                            c98.481,0,178.314-79.834,178.314-178.314C416.088,136.507,336.255,56.673,237.773,56.673z M237.774,384.817
+                            c-82.749,0-149.829-67.079-149.829-149.829c0-82.75,67.081-149.831,149.829-149.831c82.751,0,149.828,67.082,149.828,149.831
+                            C387.603,317.738,320.525,384.817,237.774,384.817z"/>
+                        <path class="shape-2" fill="url(#grad2)" d="M247.303,76.867c-98.481,0-178.315,79.834-178.315,178.317
+                            c0,98.479,79.834,178.314,178.315,178.314c98.481,0,178.314-79.836,178.314-178.314C425.617,156.701,345.784,76.867,247.303,76.867z
+                             M247.304,405.013c-82.749,0-149.83-67.08-149.83-149.829c0-82.751,67.081-149.833,149.83-149.833s149.828,67.081,149.828,149.833
+                            C397.132,337.933,330.053,405.013,247.304,405.013z"/>
+                        <path class="shape-3" fill="url(#grad3)" d="M262.227,56.672c-98.48,0-178.314,79.834-178.314,178.315
+                            c0,98.48,79.834,178.315,178.314,178.315c98.481,0,178.314-79.835,178.314-178.315C440.541,136.506,360.708,56.672,262.227,56.672z
+                             M262.227,384.817c-82.748,0-149.829-67.079-149.829-149.83c0-82.75,67.081-149.831,149.829-149.831
+                            c82.752,0,149.829,67.082,149.829,149.831C412.056,317.738,344.979,384.817,262.227,384.817z"/>
+                        <path class="shape-4" fill="url(#grad1)" d="M264.227,438.497c98.48,0,178.314-79.834,178.314-178.315c0-98.48-79.834-178.314-178.314-178.314
+                            c-98.481,0-178.314,79.834-178.314,178.314C85.912,358.663,165.745,438.497,264.227,438.497z M264.226,110.353
+                            c82.749,0,149.829,67.079,149.829,149.829s-67.08,149.831-149.829,149.831c-82.751,0-149.828-67.082-149.828-149.831
+                            C114.397,177.432,181.475,110.353,264.226,110.353z"/>
+                        <path class="shape-5" fill="url(#grad2)" d="M252.697,421.303c98.48,0,178.314-79.834,178.315-178.316
+                            c0-98.479-79.834-178.314-178.315-178.314S74.383,144.508,74.383,242.986C74.383,341.469,154.216,421.303,252.697,421.303z
+                             M252.696,93.157c82.749,0,149.83,67.08,149.83,149.829c0,82.752-67.081,149.832-149.83,149.832s-149.828-67.081-149.828-149.832
+                            C102.868,160.237,169.947,93.157,252.696,93.157z"/>
+                        <path class="shape-6" fill="url(#grad3)" d="M232.773,438.498c98.48,0,178.314-79.834,178.314-178.315
+                            c0-98.48-79.834-178.315-178.314-178.315c-98.481,0-178.314,79.835-178.314,178.315C54.459,358.664,134.292,438.498,232.773,438.498
+                            z M232.773,110.353c82.748,0,149.829,67.079,149.829,149.83c-0.001,82.749-67.081,149.831-149.829,149.831
+                            c-82.752,0-149.829-67.082-149.829-149.831C82.944,177.432,150.021,110.353,232.773,110.353z"/>
+                        </svg>
+    </div>
+        <div class="col-xs-12 col-md-9 sign-wrapper">
+            <div class="col-xs-12">
+        <p class="p">Я</p>
+            <b class="b">
+              <span1 class="span1">
+                розробник C++<br />
+                замовник з ідеєю<br />
+                герой Java<br />
+                хочу працювати вдома<br />
+                вирішу вашу проблему    </span1>
+            </b>
+            <div class="buttons-wrapper col-xs-12 col-sm-6 col-sm-offset-3">
+                <button class="button">Зареєструватися</button>
+                <button class="button">Увійти</button>
+            </div>
+            </div>
+        </div>
+
+</div>
+    <div class="col-xs-12 how-it-works">
+    <hr>
+    <h1 class="headers ">ЯК ЦЕ ПРАЦЮЄ?</h1>
+    <div class="col-xs-12 col-sm-3">
+        <div class="image1 col-xs-12">
+        </div>
+        <div class="description">
+            <p><b>СТВОРЮЙТЕ</b></p>
+            <text> Створюйте акаунт та додавайте власні проекти або заповнюйте портфоліо для того аби знайти замовника</text>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <div class="image2 col-xs-12">
+        </div>
+        <div class="description">
+            <p><b>ШУКАЙТЕ</b></p>
+            <text> Шукайте проект або розробників серед сотень пропозицій</text>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <div class="image3 col-xs-12">
+        </div>
+        <div class="description">
+            <p><b>ПРАЦЮЙТЕ</b></p>
+            <text> Розробка проекту проходить в відведеній кімнаті з чатом, трекінгом завдань, тощо</text>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <div class="image4 col-xs-12">
+        </div>
+        <div class="description">
+            <p><b>ОТРИМУЙТЕ</b></p>
+            <text> Кожна праця дає результат. Отримуйте прибуток з вашого проекту. </text>
+        </div>
+
+    </div>
+            <hr>
+
+    </div>
+    <div class="col-xs-12 skills">
+        <div class="container col-xs-12 col-sm-10 col-sm-offset-1">
+        <b>НАЙПОПУЛЯРНІШІ ГАЛУЗІ</b>
+        <hr>
+        <div class="col-xs-12 col-sm-3">
+            <p> Android Developers</p>
+            <p> iOS Developers</p>
+            <p> FrontEnd Developers</p>
+            <p> Backend Developers</p>
+            <p> Full Stack Developers</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <p> jQuery Developers</p>
+            <p> Java Developers</p>
+            <p> Python Developers</p>
+            <p> Copywriters</p>
+            <p> Textwriters</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <p> UX Designer</p>
+            <p> UI Designer</p>
+            <p> PHP Developers</p>
+            <p> Ruby Developers</p>
+            <p> Web Designers</p>
+        </div>
+        <div class="col-xs-12 col-sm-3"></div>
+            <p> Technical Writers</p>
+            <p> C# Developers</p>
+            <p> C++ Developers </p>
+            <p> Translators</p>
+            <p> Ruby on Rails Developers</p>
+            </div>
+
+    </div>
+    <div class="col-xs-12 connect">
+        <hr>
+        <h1 class="headers"> ЯК З НАМИ ЗВ'ЯЗАТИСЯ? </h1>
+        <p> Ми завжди відкриті до спілкування в соцмережах:</p>
+        <div class="button-wrapper col-xs-12 col-sm-8 col-sm-offset-2">
+             <button class="button fa fa-twitter">  TWITTER</button>
+             <button class="button fa fa-facebook-square"> FACEBOOK</button>
+             <button class="button fa fa-instagram"> INSTAGRAM</button>
+        </div>
+    </div>
+  <script type="text/javascript" src="{% static "web/js/start.js" %}"></script>
+{% endblock %}
