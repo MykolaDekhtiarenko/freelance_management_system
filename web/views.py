@@ -46,7 +46,7 @@ class AllProjectsListView(LoginRequiredMixin, ListView):
     template_name = "web/projects.html"
     paginate_by = 10
     def get_queryset(self):
-        return Project.objects.filter(stage=Project.StageValues.preparation)
+        return Project.objects.exclude(stage=Project.StageValues.finished)
 
 class MyProjectsListView(LoginRequiredMixin, ListView):
     template_name = "web/projects.html"
@@ -93,8 +93,9 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
                 # print("Current user is one of the developers;")
                 return obj
             else:
-                # print("Current user is not one of the developers;")
-                raise Http404("")
+                 return obj
+            #     # print("Current user is not one of the developers;")
+            #     raise Http404("")
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
