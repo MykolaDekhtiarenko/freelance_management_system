@@ -8,7 +8,6 @@ from api.models import Project
 @channel_session_user_from_http
 def ws_connect(message):
     prefix, label = message['path'].strip('/').split('/')
-    print(prefix, label)
     room = Project.objects.get(chatRoom=label)
     message.reply_channel.send({"accept": True})
     Group('chat-' + label).add(message.reply_channel)
@@ -21,9 +20,11 @@ def ws_receive(message):
     chatRoom = message.channel_session['room']
     project = Project.objects.get(chatRoom=chatRoom)
     data = json.loads(message['text'])
-    print("Current user: ", message.user.first_name)
-    m = project.messages.create(user=message.user, first_name=message.user.first_name, last_name=message.user.last_name, message=data['message'])
-    Group('chat-' + chatRoom).send({'text': json.dumps(m.as_dict())})
+    m = project.messages.create(user=message.user, message=data['message'])
+    responce_message = m.as_dict()
+    responce_message["first_name"] = message.user.first_name
+    responce_message["last_name"] = message.user.last_name
+    Group('chat-' + chatRoom).send({'text': json.dumps(responce_message)})
 
 
 @channel_session_user
