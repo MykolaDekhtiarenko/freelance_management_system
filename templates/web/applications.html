@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% load compile_static %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "web/css/applications.css" %}">
+    <script src="{% static "web/js/applications.js" %}"></script>
     <script src="{% static "web/js/registration.js" %}"></script>
     <div class="container">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <h1 class="headers"> Назва проекту</h1>
+    <h1 class="headers">{{ project.name }}</h1>
     <hr>
-    <p> Подано заявок : 6</p>
+    <p> Подано заявок : {{ applications.count }}</p>
 
     <div class="application-list">
-        <div class="application-item col-xs-12 ">
-            <div class="application-item-left col-xs-12 col-sm-8">
-            <h4> Анна Полякова </h4>
-            </div>
-            <div class="application-item-buttons col-xs-12 col-sm-4">
-                <div class="button-wrapper">
-                          <button type="submit" class="button button-details">Деталі</button>
-                          <button type="submit" class="button button-agree">Підтвердити</button>
+        {% for appliation in applications %}
+            <div class="application-item col-xs-12 ">
+                <div class="application-item-left col-xs-6 col-sm-6">
+                <a href="/portfolio/{{ appliation.user.id }}"><h4 class="link"> {{ appliation.user.first_name }} {{ appliation.user.last_name }} </h4></a>
+                </div>
+                <div class="application-item-buttons col-xs-6 col-sm-6">
+                    {% if appliation.status == "A" %}
+                        <h4>Прийнято</h4>
+                    {% elif appliation.status == "R" %}
+                        <h4>Відхилено</h4>
+                    {% else %}
+                    <div id="bb_{{ appliation.id }}" class="button-wrapper">
+                              <button id="decline" type="submit" class="button button-refuse" application="{{ appliation.id }}" >Відхилити</button>
+                              <button id="accept" type="submit" class="button button-agree" application="{{ appliation.id }}">Підтвердити</button>
+                    </div>
+                    {% endif %}
+
                 </div>
             </div>
-        </div>
+        {% endfor %}
+
     </div>
     </div>
     </div>

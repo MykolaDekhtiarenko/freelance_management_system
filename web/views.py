@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -12,6 +12,17 @@ def home(request):
 
 def signup(request):
     return render(request, "registration/registration.html")
+
+@login_required(login_url="/login")
+def applicaions(request, pk):
+    project = Project.objects.get(pk=pk)
+    if request.user == project.creator:
+        if project.stage==Project.StageValues.preparation:
+            return render_to_response("web/applications.html", {"applications": Application.objects.filter(project=project), "project": project})
+        else:
+            raise Http404("Now this page is unawailabe, because project stage is", project.stage)
+    else:
+        raise Http404
 
 @login_required(login_url="/login")
 def portfolio(request):
@@ -62,7 +73,7 @@ class MyTasksListView(LoginRequiredMixin, ListView):
             raise Http404("No tasks are available for superuser")
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
-    template_name = "web/applications.html"
+    template_name = "web/project.html"
 
     queryset = Project.objects.all()
     def get_object(self):
@@ -86,4 +97,5 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
         context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']), status=Application.StatusValues.accepted).count()
+        context['applicants'] = User.objects.filter(application__project=Project.objects.get(id=self.kwargs['pk']))
         return context
