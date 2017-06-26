@@ -36,6 +36,7 @@
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    padding-bottom: 70px;
   }
   .chat {
     position: fixed;
@@ -151,9 +152,23 @@
   margin-top: 10px;
 }
 .information {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('http://i066.radikal.ru/1706/9b/aa6e970a6feb.png');
+  /*background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('http://i066.radikal.ru/1706/9b/aa6e970a6feb.png');*/
   min-height: 300px;
 }
+
+.info-red{
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/web/img/red.png');
+}
+.info-yellow{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/static/web/img/yellow.png');
+}
+.info-green{
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/web/img/green.png');
+}
+.info-grey{
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/web/img/grey.png');
+}
+
 .deadline {
   font-size: 50px;
   font-family: Roboto;
@@ -356,3 +371,4 @@
 .input-message:focus {
   border: hidden;
 }
+

@@ -99,7 +99,7 @@ function addTaskCard(json, dev_names) {
     console.log(json);
     var $taskInfo = $('<div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">'
                     +'<div class="card">'
-                        +'<div class="information">'
+                        +'<div id="task_'+json.id+'" class="information info-yellow">'
                             +'<p class="deadline">'+dateFromISOToCard(json.deadline)+'</p>'
                             +'<p class="description">'+json.description+'</p>'
                             +'<button id="details" class="details glyphicon glyphicon-menu-right"></button></div>'
@@ -160,7 +160,19 @@ $('.task-grid').on('change', '.stage-picker', function (e) {
                 }
             },
             success: function (response) {
-                console.log('Request OK');
+                if(response.stage=="W"){
+                    $(".task-grid").find("#task_"+response.id).attr('class', "information info-yellow");
+                }
+                else if(response.stage=="P"){
+                    $(".task-grid").find("#task_"+response.id).attr('class', "information info-green");
+                }
+                else if(response.stage=="D"){
+                    $(".task-grid").find("#task_"+response.id).attr('class', "information info-grey");
+                }
+                else if(response.stage=="F"){
+                    $(".task-grid").find("#task_"+response.id).attr('class', "information info-red");
+                }
+
             },
             error: function (xhr, errmsg, err) {
                 //TO-DO error!!

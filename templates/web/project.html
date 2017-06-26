@@ -39,15 +39,22 @@
                         <h1>{{ accepted_applications_num }}</h1>
                         {% if user == project.creator %}
                             <div class="button-create-wrapper col-xs-12">
-                                <button type="submit" class="button button-appliers" onclick="window.location='/{# applications URL #}'">Заявки</button>
+                                <button type="submit" class="button button-appliers" onclick="window.location='/applications/{{ project.id }}'">Заявки</button>
                             </div>
                             <div class="button-create-wrapper col-xs-12">
                                 <button type="submit" class="button button-apply" id="begin_project_btn" project_id="{{ project.id }}">Розпочати</button>
                             </div>
                         {% else %}
-                            <div class="button-create-wrapper col-xs-12">
-                                <button type="submit" class="button button-apply">Податися</button>
-                            </div>
+                            {% if user.profile.role == 'D' %}
+                                <div class="button-create-wrapper col-xs-12">
+                                    {% if user not in applicants %}
+                                        <button id="apply_for_project" type="submit" class="button button-apply" project_id="{{ project.id }}">Податися</button>
+                                    {% else %}
+                                        Ви вже подали заявку на даний проект.
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
@@ -63,6 +70,7 @@
                 <div class="col-xs-12">
                     <div class="col-xs-12">
                         <button id="add" class="button">ДОДАТИ</button>
+                        <a href="/applications/{{ project.id }}"><button class="button">Заявки</button></a>
                     </div>
                 </div>
             {% endif %}
@@ -118,7 +126,13 @@
                 {% for task in project.task_set.all %}
                     <div class="task-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="card">
-                            <div class="information">
+                            <div id="task_{{ task.id }}" class="information
+                                {% if task.stage == 'W'%} info-yellow
+                                {% elif task.stage == 'P'%} info-green
+                                {% elif task.stage == 'F'%} info-red
+                                {% elif task.stage == 'D'%} info-grey
+                                {% endif %}
+                                 ">
                                 <p class="deadline"> {{ task.deadline|date:"d.m.Y" }}</p>
                                 <p class="description">{{ task.description }}</p>
                                 <input type="hidden" value="{{ task.id }}">

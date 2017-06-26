@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -14,20 +14,34 @@ def signup(request):
     return render(request, "registration/registration.html")
 
 @login_required(login_url="/login")
-def portfolio(request):
-    if not request.user.is_superuser:
-        u_role = request.user.profile.role
-        if u_role == Profile.RoleValues.developer:
-            try:
-                return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user=request.user)})
-            except Portfolio.DoesNotExist:
-                return render(request, "web/portfolio.html", {'portfolio': None})
+def applicaions(request, pk):
+    project = Project.objects.get(pk=pk)
+    if request.user == project.creator:
+        if project.stage!=Project.StageValues.finished:
+            return render_to_response("web/applications.html", {"applications": Application.objects.filter(project=project), "project": project})
         else:
-            raise Http404("No portfolio is available for users who are %s" % u_role)
+            raise Http404("Now this page is unawailabe because project was closed ")
     else:
-        raise Http404("No portfolio is available for superusers")
+        raise Http404
 
-class AllProjectsListView(ListView):
+@login_required(login_url="/login")
+def portfolio(request, pk):
+    allSkills = Skill.objects.all()
+    projectsDone = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
+                                          stage=Project.StageValues.finished).count()
+    projectsAccepted = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
+                                          stage__in=[Project.StageValues.preparation, Project.StageValues.development]).count()
+    applicationsAll = Application.objects.filter(user_id=pk).count()
+    try:
+        return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user_id=pk), 'all_skills': allSkills,
+                                                      'projects_done': projectsDone, 'projects_accepted': projectsAccepted,
+                                                      'applications_all': applicationsAll})
+    except Portfolio.DoesNotExist:
+        return render(request, "web/portfolio.html", {'portfolio': None, 'all_skills': allSkills,
+                                                      'projects_done': projectsDone, 'projects_accepted': projectsAccepted,
+                                                      'applications_all': applicationsAll, 'p_user': User.objects.get(id=pk)})
+
+class AllProjectsListView(LoginRequiredMixin, ListView):
     model = Project
     template_name = "web/projects.html"
     paginate_by = 10
@@ -42,7 +56,7 @@ class MyProjectsListView(LoginRequiredMixin, ListView):
             if self.request.user.profile.role == Profile.RoleValues.creator:
                 return Project.objects.filter(creator=self.request.user)
             elif self.request.user.profile.role == Profile.RoleValues.developer:
-                return Project.objects.filter(applications__user=self.request.user).filter(applications__status__exact=Application.StatusValues.accepted)
+                return Project.objects.filter(applications__status__exact=Application.StatusValues.accepted).filter(applications__user=self.request.user).distinct()
         else:
             raise Http404("No projects are available for superuser")
 
@@ -79,11 +93,13 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
                 # print("Current user is one of the developers;")
                 return obj
             else:
-                # print("Current user is not one of the developers;")
+            #      return obj
+            # #     # print("Current user is not one of the developers;")
                 raise Http404("")
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        context['team'] = User.objects.filter(application__project=Project.objects.filter(id=self.kwargs['pk'])).filter(application__status=Application.StatusValues.accepted)
-        context['accepted_applications_num'] = Application.objects.filter(project=Project.objects.filter(id=self.kwargs['pk']), status=Application.StatusValues.accepted).count()
+        context['team'] = User.objects.filter(application__project_id=self.kwargs['pk'], application__status=Application.StatusValues.accepted).distinct()
+        context['accepted_applications_num'] = Application.objects.filter(project_id=self.kwargs['pk'], status=Application.StatusValues.accepted).distinct().count()
+        context['applicants'] = User.objects.filter(application__project=Project.objects.get(id=self.kwargs['pk']))
         return context

@@ -25,6 +25,26 @@ $(document).ready(function () {
             }
         });
     });
+    $('#apply_for_project').on('click', function (e) {
+        $.ajax({
+            url: "/api/application/",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({'project': $(this).attr('project_id')}),
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            },
+            success: function (response) {
+                $('#apply_for_project').hide();
+                $('#apply_for_project').parent().append("Дякуємо, за заявку. Очікуйте нашої відповіді.")
+            },
+            error: function (xhr, errmsg, err) {
+                console.error(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
 });
 
 function getCookie(name) {

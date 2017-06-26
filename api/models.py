@@ -29,13 +29,17 @@ class Application(models.Model):
         accepted = ChoiceItem("A")
         refused = ChoiceItem("R")
 
-    status = models.CharField(max_length=1, choices=StatusValues.choices, default=StatusValues.waiting)
-    cv = models.TextField()
+    status = models.CharField(max_length=1, choices=StatusValues.choices, default=StatusValues.waiting, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="applications")
 
+    class Meta():
+        unique_together = (("project", "user"),)
+
 class Skill(models.Model):
     label = models.CharField(max_length=20)
+    def __str__(self):
+        return "Skill %s (id=%s)" % (self.label, self.id)
 
 class Portfolio(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -49,7 +53,8 @@ class Profile(models.Model):
     class RoleValues(DjangoChoices):
         creator = ChoiceItem("C")
         developer = ChoiceItem("D")
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=RoleValues.choices)
 
 class Task(models.Model):
