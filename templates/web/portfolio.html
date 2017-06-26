@@ -1,34 +1,186 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Профіль</h1>
-{% if portfolio %}
-    <div>
-        <h3>About:</h3>
-        <p>{{ portfolio.about }}</p>
-        <h3>Education:</h3>
-        <p>{{ portfolio.education }}</p>
-        <h3>Experience:</h3>
-        <p>{{ portfolio.experience }}</p>
-        <h3>Telephone:</h3>
-        <p>{{ portfolio.phone }}</p>
-    </div>
-{% else %}
-   <div class="row">
-                <h2>Mи хотіли б знати про вас більше<br>
-                Додайте свої дані</h2>
-                <form action="/api/portfolio/" method="post">{% csrf_token %}
-                    About:<br>
-                    <input type="text" name="about" value="Tell us about yourself"><br>
-                    Education:<br>
-                    <input type="text" name="education" value="Your education"><br>
-                    Experience:<br>
-                    <input type="text" name="experience" value="Your experience"><br>
-                    Phone:<br>
-                    <input type="text" name="phone" value="phone"><br>
-                    <input type="submit" value="Submit">
-                </form>
-{% endif %}
-
+    {% load staticfiles %}
+    {% if not portfolio %}
+        {%  if user.profile.role == 'D' %}
+            <link rel="stylesheet" href="{% static "web/css/profile_edit.css" %}">
+            <div class="container col-xs-12">
+                <div class=" information col-xs-12">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h1 class="headers">{{ user.first_name }} {{ user.last_name }}</h1>
+                        <p> Будь ласка, заповніть ваш профіль - це слугуватиме за портфоліо для майбутніх замовників</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                        <label class="add_label">Освіта</label>
+                        <p class="tips">Додайте заклади в яких ви навчалися, зокрема середні та вищі навчальні заклади,
+                            курси, тощо </p>
+                        <hr>
+                        <textarea id="portfolio_edu" class="form-control" rows="5"></textarea>
+                        <label class="add_label">Досвід роботи</label>
+                        <p class="tips">Додайте перелік місць, де ви працювали, не забудьте вказати час роботи, назву
+                            компанії та займану посаду</p>
+                        <hr>
+                        <textarea id="portfolio_exp" class="form-control" rows="5"></textarea>
+                        <label class="add_label">Короткий Cover Letter</label>
+                        <p class="tips">В даний пункт додайте короткий опис про себе, ваші основні переваги та
+                            недоліки</p>
+                        <hr>
+                        <textarea id="portfolio_about" class="form-control" rows="5"></textarea>
+                        <label class="add_label">Номер телефону</label>
+                        <hr>
+                        <input id="portfolio_phone" type="text" class="form-control">
+                        <div class="picker">
+                            <label for="selectpicker" class="add_label">Вміння</label>
+                            <p class="tips"> Додайте якомога більше вмінь для того аби замовник міг зрозуміти, що ви
+                                підходите для проекту</p>
+                            <hr>
+                            <select id="portfolio_skills" class="selectpicker" multiple data-live-search="true"
+                                    showTick="true">
+                                {% for skill in all_skills %}
+                                    <option value="{{ skill.id }}">{{ skill.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="errornote text-center" id="portfolio_err"></div>
+                        <div class="button-wrapper">
+                            <button type="submit" class="button button-agree" id="portfolio_post">Зберегти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="{% static "web/js/profile_edit.js" %}"></script>
+        {% else %}
+            <link rel="stylesheet" href="{% static "web/css/profile.css" %}">
+            <div class="container col-xs-12">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                    <h1 class="headers">{{ p_user.first_name }} {{ p_user.last_name }}</h1>
+                    <p class="tips">Email: {{ p_user.email }}</p>
+                    <hr>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="wrapper col-xs-12">
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ projects_done }}</h1>
+                                <p>проектів виконано</p>
+                            </div>
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ projects_accepted }}</h1>
+                                <p>проектів у розробці</p>
+                            </div>
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ applications_all }}</h1>
+                                <p>заявок подано</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <hr>
+                        No portfolio yet
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="{% static "web/js/profile.js" %}"></script>
+        {% endif %}
+    {% else %}
+        {% if user == portfolio.user %}
+            <link rel="stylesheet" href="{% static "web/css/profile_edit.css" %}">
+            <div class="container col-xs-12">
+                <div class=" information col-xs-12">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h1 class="headers">{{ user.first_name }} {{ user.last_name }}</h1>
+                        <p> Будь ласка, заповніть ваш профіль - це слугуватиме за портфоліо для майбутніх замовників</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                        <label class="add_label">Освіта</label>
+                        <p class="tips">Додайте заклади в яких ви навчалися, зокрема середні та вищі навчальні заклади,
+                            курси, тощо </p>
+                        <hr>
+                        <textarea id="portfolio_edu" class="form-control" rows="5">{{ portfolio.education }}</textarea>
+                        <label class="add_label">Досвід роботи</label>
+                        <p class="tips">Додайте перелік місць, де ви працювали, не забудьте вказати час роботи, назву
+                            компанії та займану посаду</p>
+                        <hr>
+                        <textarea id="portfolio_exp" class="form-control" rows="5">{{ portfolio.experience }}</textarea>
+                        <label class="add_label">Короткий Cover Letter</label>
+                        <p class="tips">В даний пункт додайте короткий опис про себе, ваші основні переваги та
+                            недоліки</p>
+                        <hr>
+                        <textarea id="portfolio_about" class="form-control" rows="5">{{ portfolio.about }}</textarea>
+                        <label class="add_label">Номер телефону</label>
+                        <hr>
+                        <input id="portfolio_phone" type="text" class="form-control" value="{{ portfolio.phone }}">
+                        <div class="picker">
+                            <label for="selectpicker" class="add_label">Вміння</label>
+                            <p class="tips"> Додайте якомога більше вмінь для того аби замовник міг зрозуміти, що ви
+                                підходите для проекту</p>
+                            <hr>
+                            <select id="portfolio_skills" class="selectpicker" multiple data-live-search="true"
+                                    showTick="true">
+                                {% for skill in all_skills %}
+                                  {% if skill in portfolio.skills.all %}
+                                      <option value="{{ skill.id }}" selected>{{ skill.label }}</option>
+                                  {% else %}
+                                      <option value="{{ skill.id }}">{{ skill.label }}</option>
+                                  {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    <input type="hidden" id="portfolio_id" value="{{ portfolio.id }}">
+                    <div class="errornote text-center" id="portfolio_err"></div>
+                        <div class="button-wrapper">
+                            <button type="submit" class="button button-agree" id="portfolio_update">Зберегти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="{% static "web/js/profile_edit.js" %}"></script>
+        {% else %}
+            <link rel="stylesheet" href="{% static "web/css/profile.css" %}">
+            <div class="container col-xs-12">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                    <h1 class="headers">{{ portfolio.user.first_name }} {{ portfolio.user.last_name }}</h1>
+                    <p class="tips">Email: {{ portfolio.user.email }}</p>
+                    <p class="tips">Телефон: {{ portfolio.phone }}</p>
+                    <hr>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="wrapper col-xs-12">
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ projects_done }}</h1>
+                                <p>проектів виконано</p>
+                            </div>
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ projects_accepted }}</h1>
+                                <p>проектів у розробці</p>
+                            </div>
+                            <div class="col-xs-4 count">
+                                <h1 class="number">{{ applications_all }}</h1>
+                                <p>заявок подано</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <hr>
+                        <div class="group">
+                            <label for="group"> Навички: </label>
+                            {% for skill in portfolio.skills.all %}
+                                <span class="skill">{{ skill.label }}</span>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                        <label>Коротко про себе</label>
+                        <p>{{ portfolio.about }}</p>
+                        <hr>
+                        <label>Освіта</label>
+                        <p>{{ portfolio.education }}</p>
+                        <hr>
+                        <label>Досвід роботи</label>
+                        <p>{{ portfolio.experience }}</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="{% static "web/js/profile.js" %}"></script>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -14,18 +14,28 @@ def signup(request):
     return render(request, "registration/registration.html")
 
 @login_required(login_url="/login")
-def portfolio(request):
-    if not request.user.is_superuser:
-        u_role = request.user.profile.role
-        if u_role == Profile.RoleValues.developer:
-            try:
-                return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user=request.user)})
-            except Portfolio.DoesNotExist:
-                return render(request, "web/portfolio.html", {'portfolio': None})
-        else:
-            raise Http404("No portfolio is available for users who are %s" % u_role)
-    else:
-        raise Http404("No portfolio is available for superusers")
+def portfolio(request, pk):
+    # if not request.user.is_superuser:
+    #     u_role = request.user.profile.role
+        # if u_role == Profile.RoleValues.developer:
+    allSkills = Skill.objects.all()
+    projectsDone = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
+                                          stage=Project.StageValues.finished).count()
+    projectsAccepted = Project.objects.filter(applications__status=Application.StatusValues.accepted, applications__user_id=pk,
+                                          stage__in=[Project.StageValues.preparation, Project.StageValues.development]).count()
+    applicationsAll = Application.objects.filter(user_id=pk).count()
+    try:
+        return render(request, "web/portfolio.html", {'portfolio': Portfolio.objects.get(user_id=pk), 'all_skills': allSkills,
+                                                      'projects_done': projectsDone, 'projects_accepted': projectsAccepted,
+                                                      'applications_all': applicationsAll})
+    except Portfolio.DoesNotExist:
+        return render(request, "web/portfolio.html", {'portfolio': None, 'all_skills': allSkills,
+                                                      'projects_done': projectsDone, 'projects_accepted': projectsAccepted,
+                                                      'applications_all': applicationsAll, 'p_user': User.objects.get(id=pk)})
+        # else:
+        #     raise Http404("No portfolio is available for users who are %s" % u_role)
+    # else:
+        # raise Http404("No portfolio is available for superusers")
 
 class AllProjectsListView(ListView):
     model = Project
@@ -62,7 +72,7 @@ class MyTasksListView(LoginRequiredMixin, ListView):
             raise Http404("No tasks are available for superuser")
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
-    template_name = "web/profile_edit.html"
+    template_name = "web/project.html"
 
     queryset = Project.objects.all()
     def get_object(self):
